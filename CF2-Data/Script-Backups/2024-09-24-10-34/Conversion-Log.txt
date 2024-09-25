@@ -1,0 +1,105 @@
+Converting script [1 / 13]	[\Standard Assets\Characters\FirstPersonCharacter\Scripts\FirstPersonController.cs]
+	Fragments : 4
+		[ 0] : Line:   77	InputMethod   GetButtonDown       	("Jump")
+		[ 1] : Line:  217	InputMethod   GetAxis             	("Horizontal")
+		[ 2] : Line:  218	InputMethod   GetAxis             	("Vertical")
+		[ 3] : Line:  227	InputMethod   GetKey              	(KeyCode.LeftShift)
+
+Converting script [2 / 13]	[\Standard Assets\Characters\FirstPersonCharacter\Scripts\MouseLook.cs]
+	Fragments : 10
+		[ 0] : Line:   36	InputMethod   GetAxis             	("Mouse X")
+		[ 1] : Line:   37	InputMethod   GetAxis             	("Mouse Y")
+		[ 2] : Line:   74	Other mod.	[Cursor.lockState]
+		[ 3] : Line:   75	Other mod.	[Cursor.visible]
+		[ 4] : Line:   88	InputMethod   GetKeyUp            	(KeyCode.Escape)
+		[ 5] : Line:   92	InputMethod   GetMouseButtonUp    	(0)
+		[ 6] : Line:   99	Other mod.	[Cursor.lockState]
+		[ 7] : Line:  100	Other mod.	[Cursor.visible]
+		[ 8] : Line:  104	Other mod.	[Cursor.lockState]
+		[ 9] : Line:  105	Other mod.	[Cursor.visible]
+
+Converting script [3 / 13]	[\Standard Assets\Characters\FirstPersonCharacter\Scripts\RigidbodyFirstPersonController.cs]
+	Fragments : 4
+		[ 0] : Line:   47	InputMethod   GetKey              	(RunKey)
+		[ 1] : Line:  133	InputMethod   GetButtonDown       	("Jump")
+		[ 2] : Line:  218	InputMethod   GetAxis             	("Horizontal")
+		[ 3] : Line:  219	InputMethod   GetAxis             	("Vertical")
+
+Converting script [4 / 13]	[\Standard Assets\Utility\DragRigidbody.cs]
+	Fragments : 5
+		[ 0] : Line:   22	InputMethod   GetMouseButtonDown  	(0)
+		[ 1] : Line:   32	InputProperty mousePosition       
+		[ 2] : Line:   33	InputProperty mousePosition       
+		[ 3] : Line:   71	InputMethod   GetMouseButton      	(0)
+		[ 4] : Line:   73	InputProperty mousePosition       
+
+Converting script [5 / 13]	[\Standard Assets\Utility\ForcedReset.cs]
+	Fragments : 1
+		[ 0] : Line:   12	InputMethod   GetButtonDown       	("ResetObject")
+
+Converting script [6 / 13]	[\Standard Assets\Utility\SimpleMouseRotator.cs]
+	Fragments : 4
+		[ 0] : Line:   47	InputMethod   GetAxis             	("Mouse X")
+		[ 1] : Line:   48	InputMethod   GetAxis             	("Mouse Y")
+		[ 2] : Line:   97	InputProperty mousePosition       
+		[ 3] : Line:   98	InputProperty mousePosition       
+
+Converting script [7 / 13]	[\SWS\Examples\Scripts\CameraInputDemo.cs]
+	Fragments : 1
+		[ 0] : Line:   42	InputMethod   GetKeyDown          	(KeyCode.UpArrow)
+
+Converting script [8 / 13]	[\SWS\Examples\Scripts\PathInputDemo.cs]
+	Fragments : 5
+		[ 0] : Line:   49	InputMethod   GetKey              	(KeyCode.RightArrow)
+		[ 1] : Line:   59	InputMethod   GetKey              	(KeyCode.LeftArrow)
+		[ 2] : Line:   68	InputMethod   GetKey              	(KeyCode.RightArrow)
+		[ 3] : Line:   68	InputMethod   GetKey              	(KeyCode.LeftArrow)
+		[ 4] : Line:   80	InputMethod   GetKey              	(KeyCode.LeftArrow)
+
+Converting script [9 / 13]	[\SWS\Examples\Scripts\RapidInputDemo.cs]
+	Fragments : 1
+		[ 0] : Line:   91	InputMethod   GetKeyDown          	(KeyCode.UpArrow)
+
+Converting script [10 / 13]	[\_DoubleSidedShaders\Script\CameraScript.cs]
+	Fragments : 9
+		[ 0] : Line:  102	InputMethod   GetMouseButton      	(0)
+		[ 1] : Line:  104	Other mod.	[Cursor.visible]
+		[ 2] : Line:  105	Other mod.	[Cursor.lockState]
+		[ 3] : Line:  109	Other mod.	[Cursor.visible]
+		[ 4] : Line:  110	Other mod.	[Cursor.lockState]
+		[ 5] : Line:  113	InputMethod   GetAxis             	("Horizontal")
+		[ 6] : Line:  114	InputMethod   GetAxis             	("Vertical")
+		[ 7] : Line:  116	InputMethod   GetAxisRaw          	("Mouse X")
+		[ 8] : Line:  117	InputMethod   GetAxisRaw          	("Mouse Y")
+
+Converting script [11 / 13]	[\_DoubleSidedShaders\Script\GameControl.cs]
+	Fragments : 1
+		[ 0] : Line:   32	InputMethod   GetKey              	(KeyCode.Escape)
+
+Converting script [12 / 13]	[\_DoubleSidedShaders\Script\SpriteFlip.cs]
+	Fragments : 2
+		[ 0] : Line:   31	InputMethod   GetKeyDown          	(KeyCode .G)
+		[ 1] : Line:   35	InputMethod   GetKeyDown          	(KeyCode.F)
+
+Converting script [13 / 13]	[\_DoubleSidedShaders\Script\ToggleText.cs]
+	Fragments : 1
+		[ 0] : Line:   40	InputMethod   GetKeyDown          	(KeyCode.F1)
+
+
+13 scripts modified!
+Overwriting actual scripts...
+	[0 / 13] from  [C:/Users/goldf/Desktop/Project/Super Market S/CF2-Data/Script-Backups/2024-09-24-10-34\Assets-After/\Standard Assets\Characters\FirstPersonCharacter\Scripts\FirstPersonController.cs] to [C:/Users/goldf/Desktop/Project/Super Market S/Assets/\Standard Assets\Characters\FirstPersonCharacter\Scripts\FirstPersonController.cs]
+	[1 / 13] from  [C:/Users/goldf/Desktop/Project/Super Market S/CF2-Data/Script-Backups/2024-09-24-10-34\Assets-After/\Standard Assets\Characters\FirstPersonCharacter\Scripts\MouseLook.cs] to [C:/Users/goldf/Desktop/Project/Super Market S/Assets/\Standard Assets\Characters\FirstPersonCharacter\Scripts\MouseLook.cs]
+	[2 / 13] from  [C:/Users/goldf/Desktop/Project/Super Market S/CF2-Data/Script-Backups/2024-09-24-10-34\Assets-After/\Standard Assets\Characters\FirstPersonCharacter\Scripts\RigidbodyFirstPersonController.cs] to [C:/Users/goldf/Desktop/Project/Super Market S/Assets/\Standard Assets\Characters\FirstPersonCharacter\Scripts\RigidbodyFirstPersonController.cs]
+	[3 / 13] from  [C:/Users/goldf/Desktop/Project/Super Market S/CF2-Data/Script-Backups/2024-09-24-10-34\Assets-After/\Standard Assets\Utility\DragRigidbody.cs] to [C:/Users/goldf/Desktop/Project/Super Market S/Assets/\Standard Assets\Utility\DragRigidbody.cs]
+	[4 / 13] from  [C:/Users/goldf/Desktop/Project/Super Market S/CF2-Data/Script-Backups/2024-09-24-10-34\Assets-After/\Standard Assets\Utility\ForcedReset.cs] to [C:/Users/goldf/Desktop/Project/Super Market S/Assets/\Standard Assets\Utility\ForcedReset.cs]
+	[5 / 13] from  [C:/Users/goldf/Desktop/Project/Super Market S/CF2-Data/Script-Backups/2024-09-24-10-34\Assets-After/\Standard Assets\Utility\SimpleMouseRotator.cs] to [C:/Users/goldf/Desktop/Project/Super Market S/Assets/\Standard Assets\Utility\SimpleMouseRotator.cs]
+	[6 / 13] from  [C:/Users/goldf/Desktop/Project/Super Market S/CF2-Data/Script-Backups/2024-09-24-10-34\Assets-After/\SWS\Examples\Scripts\CameraInputDemo.cs] to [C:/Users/goldf/Desktop/Project/Super Market S/Assets/\SWS\Examples\Scripts\CameraInputDemo.cs]
+	[7 / 13] from  [C:/Users/goldf/Desktop/Project/Super Market S/CF2-Data/Script-Backups/2024-09-24-10-34\Assets-After/\SWS\Examples\Scripts\PathInputDemo.cs] to [C:/Users/goldf/Desktop/Project/Super Market S/Assets/\SWS\Examples\Scripts\PathInputDemo.cs]
+	[8 / 13] from  [C:/Users/goldf/Desktop/Project/Super Market S/CF2-Data/Script-Backups/2024-09-24-10-34\Assets-After/\SWS\Examples\Scripts\RapidInputDemo.cs] to [C:/Users/goldf/Desktop/Project/Super Market S/Assets/\SWS\Examples\Scripts\RapidInputDemo.cs]
+	[9 / 13] from  [C:/Users/goldf/Desktop/Project/Super Market S/CF2-Data/Script-Backups/2024-09-24-10-34\Assets-After/\_DoubleSidedShaders\Script\CameraScript.cs] to [C:/Users/goldf/Desktop/Project/Super Market S/Assets/\_DoubleSidedShaders\Script\CameraScript.cs]
+	[10 / 13] from  [C:/Users/goldf/Desktop/Project/Super Market S/CF2-Data/Script-Backups/2024-09-24-10-34\Assets-After/\_DoubleSidedShaders\Script\GameControl.cs] to [C:/Users/goldf/Desktop/Project/Super Market S/Assets/\_DoubleSidedShaders\Script\GameControl.cs]
+	[11 / 13] from  [C:/Users/goldf/Desktop/Project/Super Market S/CF2-Data/Script-Backups/2024-09-24-10-34\Assets-After/\_DoubleSidedShaders\Script\SpriteFlip.cs] to [C:/Users/goldf/Desktop/Project/Super Market S/Assets/\_DoubleSidedShaders\Script\SpriteFlip.cs]
+	[12 / 13] from  [C:/Users/goldf/Desktop/Project/Super Market S/CF2-Data/Script-Backups/2024-09-24-10-34\Assets-After/\_DoubleSidedShaders\Script\ToggleText.cs] to [C:/Users/goldf/Desktop/Project/Super Market S/Assets/\_DoubleSidedShaders\Script\ToggleText.cs]
+
+Overwriting COMPLETED!
