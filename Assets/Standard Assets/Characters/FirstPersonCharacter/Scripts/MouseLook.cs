@@ -19,7 +19,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private Quaternion m_CharacterTargetRot;
         private Quaternion m_CameraTargetRot;
-        private bool m_cursorIsLocked = true;
+        private bool m_cursorIsLocked = false;
 
         [HideInInspector] public Vector2 LookAxis;
 
@@ -33,8 +33,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public void LookRotation(Transform character, Transform camera)
         {
             //For PC COntrols Mouse
-            float yRot = Input.GetAxis("Mouse X") * XSensitivity;
-            float xRot = Input.GetAxis("Mouse Y") * YSensitivity;
+            float yRot = ControlFreak2.CF2Input.GetAxis("Mouse X") * XSensitivity;
+            float xRot = ControlFreak2.CF2Input.GetAxis("Mouse Y") * YSensitivity;
 
 
             // For Look control Mobile
@@ -71,8 +71,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             lockCursor = value;
             if(!lockCursor)
             {//we force unlock the cursor if the user disable the cursor locking helper
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
+                ControlFreak2.CFCursor.lockState = CursorLockMode.None;
+                ControlFreak2.CFCursor.visible = true;
             }
         }
 
@@ -85,24 +85,24 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void InternalLockUpdate()
         {
-            if(Input.GetKeyUp(KeyCode.Escape))
+            if(ControlFreak2.CF2Input.GetKeyUp(KeyCode.Escape))
             {
                 m_cursorIsLocked = false;
             }
-            else if(Input.GetMouseButtonUp(0))
+            else if(ControlFreak2.CF2Input.GetMouseButtonUp(0))
             {
-                m_cursorIsLocked = true;
+              //  m_cursorIsLocked = true;
             }
 
             if (m_cursorIsLocked)
             {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                ControlFreak2.CFCursor.lockState = CursorLockMode.Locked;
+                ControlFreak2.CFCursor.visible = false;
             }
             else if (!m_cursorIsLocked)
             {
-                Cursor.lockState = CursorLockMode.None;
-               Cursor.visible = true;
+                ControlFreak2.CFCursor.lockState = CursorLockMode.None;
+               ControlFreak2.CFCursor.visible = true;
             }
         }
 

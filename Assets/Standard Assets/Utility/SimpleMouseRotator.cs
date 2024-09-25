@@ -44,8 +44,8 @@ namespace UnityStandardAssets.Utility
             float inputV;
             if (relative)
             {
-                inputH = Input.GetAxis("Mouse X");
-                inputV = Input.GetAxis("Mouse Y");
+                inputH = ControlFreak2.CF2Input.GetAxis("Mouse X");
+                inputV = ControlFreak2.CF2Input.GetAxis("Mouse Y");
 
                 // wrap values to avoid springing quickly the wrong way from positive to negative
                 if (m_TargetAngles.y > 180)
@@ -94,8 +94,8 @@ namespace UnityStandardAssets.Utility
             }
             else
             {
-                inputH = Input.mousePosition.x;
-                inputV = Input.mousePosition.y;
+                inputH = ControlFreak2.CF2Input.mousePosition.x;
+                inputV = ControlFreak2.CF2Input.mousePosition.y;
 
                 // set values to allowed range
                 m_TargetAngles.y = Mathf.Lerp(-rotationRange.y*0.5f, rotationRange.y*0.5f, inputH/Screen.width);

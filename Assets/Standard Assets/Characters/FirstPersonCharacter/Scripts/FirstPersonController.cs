@@ -74,7 +74,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump && m_CharacterController.isGrounded)
             {
-                m_Jump = Input.GetButtonDown("Jump");
+                m_Jump = ControlFreak2.CF2Input.GetButtonDown("Jump");
                 //m_Jump = jumpAxis;
             }
 
@@ -214,8 +214,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void GetInput(out float speed)
         {
             // Read input
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
+            float horizontal = ControlFreak2.CF2Input.GetAxis("Horizontal");
+            float vertical = ControlFreak2.CF2Input.GetAxis("Vertical");
             //float horizontal = RunAxis.x;
             //float vertical = RunAxis.y; ;
 
@@ -224,7 +224,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 #if !MOBILE_INPUT
             // On standalone builds, walk/run speed is modified by a key press.
             // keep track of whether or not the character is walking or running
-            m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
+            m_IsWalking = !ControlFreak2.CF2Input.GetKey(KeyCode.LeftShift);
 #endif
             // set the desired speed to be walking or running
             speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;

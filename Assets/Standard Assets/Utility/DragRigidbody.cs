@@ -19,7 +19,7 @@ namespace UnityStandardAssets.Utility
         private void Update()
         {
             // Make sure the user pressed the mouse down
-            if (!Input.GetMouseButtonDown(0))
+            if (!ControlFreak2.CF2Input.GetMouseButtonDown(0))
             {
                 return;
             }
@@ -29,8 +29,8 @@ namespace UnityStandardAssets.Utility
             // We need to actually hit an object
             RaycastHit hit = new RaycastHit();
             if (
-                !Physics.Raycast(mainCamera.ScreenPointToRay(Input.mousePosition).origin,
-                                 mainCamera.ScreenPointToRay(Input.mousePosition).direction, out hit, 100,
+                !Physics.Raycast(mainCamera.ScreenPointToRay(ControlFreak2.CF2Input.mousePosition).origin,
+                                 mainCamera.ScreenPointToRay(ControlFreak2.CF2Input.mousePosition).direction, out hit, 100,
                                  Physics.DefaultRaycastLayers))
             {
                 return;
@@ -68,9 +68,9 @@ namespace UnityStandardAssets.Utility
             m_SpringJoint.connectedBody.drag = k_Drag;
             m_SpringJoint.connectedBody.angularDrag = k_AngularDrag;
             var mainCamera = FindCamera();
-            while (Input.GetMouseButton(0))
+            while (ControlFreak2.CF2Input.GetMouseButton(0))
             {
-                var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+                var ray = mainCamera.ScreenPointToRay(ControlFreak2.CF2Input.mousePosition);
                 m_SpringJoint.transform.position = ray.GetPoint(distance);
                 yield return null;
             }

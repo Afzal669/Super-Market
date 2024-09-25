@@ -44,7 +44,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 					CurrentTargetSpeed = ForwardSpeed;
 				}
 #if !MOBILE_INPUT
-	            if (Input.GetKey(RunKey))
+	            if (ControlFreak2.CF2Input.GetKey(RunKey))
 	            {
 		            CurrentTargetSpeed *= RunMultiplier;
 		            m_Running = true;
@@ -130,7 +130,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             RotateView();
 
-            if (Input.GetButtonDown("Jump") && !m_Jump)
+            if (ControlFreak2.CF2Input.GetButtonDown("Jump") && !m_Jump)
             {
                 m_Jump = true;
             }
@@ -215,8 +215,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             
             Vector2 input = new Vector2
                 {
-                    x = Input.GetAxis("Horizontal"),
-                    y = Input.GetAxis("Vertical")
+                    x = ControlFreak2.CF2Input.GetAxis("Horizontal"),
+                    y = ControlFreak2.CF2Input.GetAxis("Vertical")
                 };
 			movementSettings.UpdateDesiredTargetSpeed(input);
             return input;
