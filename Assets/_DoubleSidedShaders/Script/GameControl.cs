@@ -29,7 +29,7 @@ namespace MLSpace
         void Update()
         {
             // quit on escape
-            if (Input.GetKey(KeyCode.Escape))
+            if (ControlFreak2.CF2Input.GetKey(KeyCode.Escape))
                 Application.Quit();
 
 #if !UNITY_IOS && !UNITY_ANDROID && !UNITY_BLACKBERRY && !UNITY_WP8 && !UNITY_WP8_1

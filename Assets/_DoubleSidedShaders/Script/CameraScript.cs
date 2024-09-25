@@ -99,22 +99,22 @@ namespace MLSpace
                     break;
             }
 #else
-            if (!Input.GetMouseButton(0)) 
+            if (!ControlFreak2.CF2Input.GetMouseButton(0)) 
             {
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
+                ControlFreak2.CFCursor.visible = true;
+                ControlFreak2.CFCursor.lockState = CursorLockMode.None;
                 return; 
             }
 
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+            ControlFreak2.CFCursor.visible = false;
+            ControlFreak2.CFCursor.lockState = CursorLockMode.Locked;
 
 
-            float h = Input.GetAxis("Horizontal");
-            float v = Input.GetAxis("Vertical");
+            float h = ControlFreak2.CF2Input.GetAxis("Horizontal");
+            float v = ControlFreak2.CF2Input.GetAxis("Vertical");
 
-            float angleAroundY = Input.GetAxisRaw("Mouse X");
-            float angleAroundX = -Input.GetAxisRaw("Mouse Y");
+            float angleAroundY = ControlFreak2.CF2Input.GetAxisRaw("Mouse X");
+            float angleAroundX = -ControlFreak2.CF2Input.GetAxisRaw("Mouse Y");
 
             float f = v * speed * Time.deltaTime;
             float s = h * speed * Time.deltaTime;

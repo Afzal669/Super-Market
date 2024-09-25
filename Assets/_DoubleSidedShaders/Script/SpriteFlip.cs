@@ -28,11 +28,11 @@ public class SpriteFlip : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode .G))
+        if(ControlFreak2.CF2Input.GetKeyDown(KeyCode .G))
         {
             flip(true);
         }
-        if(Input.GetKeyDown (KeyCode.F))
+        if(ControlFreak2.CF2Input.GetKeyDown (KeyCode.F))
         {
             flip(false);
         }

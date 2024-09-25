@@ -37,7 +37,7 @@ namespace MLSpace
                 return;
             }
 
-            if (Input.GetKeyDown(KeyCode.F1))
+            if (ControlFreak2.CF2Input.GetKeyDown(KeyCode.F1))
                 m_showInstr = !m_showInstr;
 
 
