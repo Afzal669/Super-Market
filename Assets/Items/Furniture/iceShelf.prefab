@@ -431,7 +431,7 @@ MonoBehaviour:
   Name: ShelfBox
   Unit_Price: 0
   Space: 0
-  Display: 0
+  Display: 1
 --- !u!65 &4152993354832453204
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -563,7 +563,7 @@ MonoBehaviour:
   Name: ShelfBox
   Unit_Price: 0
   Space: 0
-  Display: 0
+  Display: 1
 --- !u!65 &4323206282298125101
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -695,7 +695,7 @@ MonoBehaviour:
   Name: ShelfBox
   Unit_Price: 0
   Space: 0
-  Display: 0
+  Display: 1
 --- !u!65 &914209402704093201
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -827,7 +827,7 @@ MonoBehaviour:
   Name: ShelfBox
   Unit_Price: 0
   Space: 0
-  Display: 0
+  Display: 1
 --- !u!65 &3803186562739718435
 BoxCollider:
   m_ObjectHideFlags: 0

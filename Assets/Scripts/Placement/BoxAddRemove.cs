@@ -9,11 +9,25 @@ public class BoxAddRemove : MonoBehaviour
     [SerializeField] BoxLid Boxdoor1;
     public void AddProduct(GameObject product)
     {
-      if(BoxList.Count<=12)
-        BoxList.Add(product.transform);
+        if (BoxList.Count <= 12)
+        {
+            Product = product;
+            BoxList.Add(product.transform);
+        }
       
     }
+     public bool IscurrentProduct(string Itemname)
+    {
+        if(Product!=null)
+        {
+            if(Product.GetComponent<item>().Name==Itemname)
+            {
+                return true;
 
+            }
+        }
+        return false;
+    }
     
     public GameObject RemoveProduct()
     {

@@ -162,9 +162,12 @@ public class Player : MonoBehaviour
 
                     if (HandBoxPosition.childCount > 0)
                     {
+                        BoxAddRemove boxScript= HandBoxPosition.GetChild(0).GetComponent<BoxAddRemove>();
+                        if (!boxScript)
+                              return;
                         if (shelf.currentProduct)
                         {
-                            if (shelf.currentProduct.GetComponent<item>().Name != HandBoxPosition.GetChild(0).GetComponent<BoxAddRemove>().Product.GetComponent<item>().Name)
+                            if (!boxScript.IscurrentProduct(shelf.currentProduct.GetComponent<item>().Name))
                                 return;
                             if (!shelf.hasAvailableSlot())
                             {
@@ -178,6 +181,10 @@ public class Player : MonoBehaviour
                         }
                         else
                         {
+                            print("out is this work");
+                            if (!(shelf.GetComponent<item>().Display == boxScript.Product.GetComponent<item>().Display))
+                                return;
+                            print("Print is this work");
                             GameObject o = HandBoxPosition.GetChild(0).GetComponent<BoxAddRemove>().RemoveProduct();
                             if (o)
                             {

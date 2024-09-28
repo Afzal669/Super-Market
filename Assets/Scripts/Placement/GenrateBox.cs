@@ -24,7 +24,6 @@ public class GenrateBox : MonoBehaviour
         List<GameObject> list = new List<GameObject>();
         BoxCollider productCollider = Product.GetComponent<BoxCollider>();
         BoxAddRemove boxScript = box.GetComponent<BoxAddRemove>();
-        boxScript.Product = Product;
         Vector3 productSize = productCollider.size;
         Vector3 spacing = new Vector3(
             productSize.x * spacingFactorX,
