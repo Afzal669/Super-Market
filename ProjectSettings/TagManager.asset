@@ -6,6 +6,7 @@ TagManager:
   tags:
   - TrafficCar
   - Click
+  - Pick
   layers:
   - Default
   - TransparentFX

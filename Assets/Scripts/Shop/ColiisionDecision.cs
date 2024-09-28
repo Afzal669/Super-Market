@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ColiisionDecision : MonoBehaviour
 {
+    // Start is called before the first frame update
     public bool isColliding;
 
     private void OnCollisionStay(Collision collision)
@@ -12,32 +13,32 @@ public class ColiisionDecision : MonoBehaviour
 
         float angel = Vector3.Angle(_hit, transform.up);
 
-        if (Mathf.Approximately(angel, 0))
+        if(Mathf.Approximately(angel,0))
         {
-            print("Coliiding Down");
+           // print("Coliiding Down");
             //isColliding = false;
         }
-        else if (Mathf.Approximately(angel, 180))
+        else if(Mathf.Approximately(angel,180))
         {
             isColliding = true;
-            print("Up");
+          //  print("Up");
         }
-        else if (Mathf.Approximately(angel, 90))
+        else if(Mathf.Approximately(angel,90))
         {
             isColliding = true;
             Vector3 cross = Vector3.Cross(Vector3.forward, _hit);
-            if (cross.y > 0)
+            if(cross.y > 0)
             {
-                print("Left");
+              //  print("Left");
             }
             else
             {
-                print("Rigt");
+               // print("Rigt");
             }
         }
         else
         {
-            // isColliding = false;
+           // isColliding = false;
         }
     }
     private void OnCollisionExit(Collision collision)
