@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -728984443525958977}
   m_Layer: 0
   m_Name: Rice
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 8996536874607799994}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 36d19338f8861da47892f1d5d02db22c, type: 3}
   Name: 
   Unit_Price: 8.98
   Space: 12
@@ -110,7 +110,7 @@ BoxCollider:
   m_GameObject: {fileID: 8996536874607799994}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.32925186, y: 0.337923, z: 0.14170896}
   m_Center: {x: 0, y: 0.16899237, z: 0.000000007450581}

@@ -13,6 +13,7 @@ public class ShopManagment : MonoBehaviour
     public bool isInProductMood = true;
     public List<CartItems> cartItemsList;
     public List<CartItems> cartItemsListFurnish;
+    public List<GameObject> AllProductsCardsCounters;
 
     public static ShopManagment instance;
 
@@ -66,7 +67,7 @@ public class ShopManagment : MonoBehaviour
         {
             q = item.Quantity; 
             i = item.item.GetComponent<item>();
-            u = i.Unit_Price;
+            u = i.Unit_Price * 12f;
             t = u * q;
             TotalPrice += t;
         }
@@ -127,10 +128,21 @@ public class ShopManagment : MonoBehaviour
                 foreach (var item in cartItemsList)
                 {
                  
-                     GenrateBox.Instance.CreateBox(item.item, item.Quantity);
+                    for(int i = 0; i<item.Quantity; i++)
+                    {
+                        GenrateBox.Instance.CreateBox(item.item, 12);
+                    }
+                     
    
                 }
-            }else
+                Player.instance.Sound.clip = Player.instance.Money;
+                Player.instance.Sound.Play();
+                Player.instance.UpdatePlayerMoney(-TotalPrice);
+                cartItemsList.Clear();
+                TotalPrice = 0;
+                Ui_Manager.instance.TotalPrice.text = TotalPrice.ToString() + " $";
+            }
+            else
             {
                 // Furnish
                 foreach (var item in cartItemsListFurnish)
@@ -139,11 +151,37 @@ public class ShopManagment : MonoBehaviour
                     {
                         box = Instantiate(Box, PositionToInst.transform);
                         box.name = "Box";
+                        if(item.item.GetComponent<FurnishItem>())
+                        {
+                            item.item.name = item.item.GetComponent<FurnishItem>().name;
+                        }
+                        
                         box.GetComponent<Box>().item = item.item;
                         //box.GetComponent<Box>().count = item.Quantity;
                     }
                     
                 }
+                Player.instance.Sound.clip = Player.instance.Money;
+                Player.instance.Sound.Play();
+                Player.instance.UpdatePlayerMoney(-TotalPrice);
+                cartItemsListFurnish.Clear();
+                TotalPrice = 0;
+                Ui_Manager.instance.TotalPrice.text = TotalPrice.ToString() + " $";
+            }
+            foreach(GameObject t in AllProductsCardsCounters)
+            {
+                if(t)
+                {
+                    if(t.GetComponent<FurnitureCard>())
+                    {
+                        t.GetComponent<FurnitureCard>().ResetData();
+                    }else if(t.GetComponent<CardItem>())
+                    {
+                        t.GetComponent<CardItem>().ResetData();
+                    }
+                    
+                }
+                
             }
             
         }

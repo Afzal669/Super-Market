@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: 7859694361036623856}
   m_Layer: 0
   m_Name: Coffe_box
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 65
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &439790
 Transform:
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 183880}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 8a465f8d0451ccf4f9545bbc7a5fc83b, type: 3}
   Name: 
   Unit_Price: 10.95
   Space: 12
@@ -110,7 +110,7 @@ BoxCollider:
   m_GameObject: {fileID: 183880}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.2262268, y: 0.33220655, z: 0.33926392}
   m_Center: {x: 0, y: 0.16610327, z: 0}

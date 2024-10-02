@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6857304684576412610}
   m_Layer: 0
   m_Name: Almonds
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,8 +96,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 1968785530969316091}
-  sprite: {fileID: 0}
-  Name: 
+  sprite: {fileID: 21300000, guid: 2eeb9e17a7158ac4ba00d8624b19fbb5, type: 3}
+  Name: Almonds
   Unit_Price: 11.43
   Space: 12
   Display: 0
@@ -110,7 +110,7 @@ BoxCollider:
   m_GameObject: {fileID: 1968785530969316091}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.150037, y: 0.21, z: 0.07007928}
   m_Center: {x: -0.001533635, y: 0.105, z: -0.00083963387}

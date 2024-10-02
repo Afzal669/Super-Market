@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: 7419934678700314769}
   m_Layer: 0
   m_Name: Coffee_beans
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 65
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &471392
 Transform:
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 189346}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: d7b642017ff55044f9bcc4162fec327e, type: 3}
   Name: 
   Unit_Price: 11.21
   Space: 12
@@ -110,7 +110,7 @@ BoxCollider:
   m_GameObject: {fileID: 189346}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.08513641, y: 0.083559155, z: 0.33584595}
   m_Center: {x: 0, y: 0, z: 0}

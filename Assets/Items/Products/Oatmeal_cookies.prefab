@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -59558370026969246}
   m_Layer: 0
   m_Name: Oatmeal_cookies
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 6377252931406831113}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: e756cb2a727f58744b9a8856b4805374, type: 3}
   Name: 
   Unit_Price: 12
   Space: 12
@@ -110,7 +110,7 @@ BoxCollider:
   m_GameObject: {fileID: 6377252931406831113}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.16899939, y: 0.31716245, z: 0.09463981}
   m_Center: {x: -0.00000010430813, y: 0.15858123, z: 0.000000014901161}

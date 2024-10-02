@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -2703269098298670669}
   m_Layer: 0
   m_Name: Ice_cream_box_1
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 2133896664227507552}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: d590428d85804624f8fc86fce5207024, type: 3}
   Name: 
   Unit_Price: 3.85
   Space: 12
@@ -110,7 +110,7 @@ BoxCollider:
   m_GameObject: {fileID: 2133896664227507552}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.24749999, y: 0.110000014, z: 0.08250001}
   m_Center: {x: 0, y: 0.055, z: 0.000000007450581}

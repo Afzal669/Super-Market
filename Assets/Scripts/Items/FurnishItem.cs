@@ -6,10 +6,17 @@ public class FurnishItem : MonoBehaviour
 {
     public string Name;
     public float Unit_Price = 0;
-    public Collider offSetCollider;
+    public Collider offSetCollider,bigCollider;
+    public GameObject targetGreenMesh;
+    public List<GameObject> childs;
+
+    public bool isOnRightPlace = false;
 
     private void Start()
     {
-        Name = transform.name;
+        //Name = transform.name;
+
     }
+
+   
 }

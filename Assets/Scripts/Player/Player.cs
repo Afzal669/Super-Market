@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using UnityStandardAssets.Characters.FirstPerson;
 
 public class Player : MonoBehaviour
@@ -9,7 +11,7 @@ public class Player : MonoBehaviour
     public GameObject FPS_Camera;
     public GameObject Current_Interated_Obj;
     private RaycastHit _hitInfo;
-    private float rayDistance = 20f;
+    private float rayDistance = 5f;
 
     [Header("Info")]
     public CharacterController characterController;
@@ -19,7 +21,8 @@ public class Player : MonoBehaviour
     public GameObject whiteSport;
     public GameObject CF2Rig;
     public GameObject CF2Panal;
-    public float PlayerAmount = 5000;
+    public float PlayerAmount;
+    public DayTimeManager DayTime;
 
     [Header("CashMachine Controls")]
     public bool isOnCashMachine = false;
@@ -28,24 +31,49 @@ public class Player : MonoBehaviour
 
     [Header("Computer")]
     public bool isOnComputer = false;
+    //Usama
+    private CashDrawerWorking CashController;
+    public GameObject prefabItemDetailinBill;
+    private List<item> PurchasedItem = new List<item>();
+    private List<GameObject> PurchasedItemDetail = new List<GameObject>();
+    private float TotalPayment = 0;
+    private float DayTotalPayment = 0;
+    private float DayStartPayment = 0;
+    private CharcaterBehaviour CharacterAtCashMachine;
+    public CustomerManager CUSTOMERITEMS;
 
     [Header("UI Bttons")]
     public GameObject ClickBtn;
     public GameObject ExitBtn;
     public GameObject PlaceBtn;
+    public GameObject DropBtn;
+    public GameObject MinusDolllarBtn;
     public GameObject RotateBtn;
+    public GameObject ReplaceBtn;
+    public Button ConfirmPayment;
+    public GameObject OpenBoxButton;
+    public GameObject EditPricePanal;
+    public Text PlayerMoneyText;
 
     [Header("Object Placement")]
     public bool isRotatingObject;
     public bool canRotate;
-    private float moveWheelRotation, objectRotateSPeed = 0.2f;
+    private float moveWheelRotation, objectRotateSPeed = 100f;
     public GameObject SpawnObject;
     public GameObject TempPlaceObject;
     public Material green;
     public Material red;
     public Material OriginalMat;
     public Transform HandBoxPosition;
-
+    [Header("Sound")]
+    public AudioSource Music;
+    public AudioSource Sound;
+    public AudioClip Swap;
+    public AudioClip BoxOpen;
+    public AudioClip place;
+    public AudioClip Money;
+    //bool isBoxOpen;
+    public bool canPlace = false;
 
 
     public static Player instance;
@@ -57,7 +85,10 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-
+        Application.targetFrameRate = 60;
+        PlayerAmount = PlayerPrefs.GetFloat("Money", 5000);
+        PlayerMoneyText.text = "$" + PlayerAmount;
+       
     }
 
     // Update is called once per frame
@@ -69,11 +100,41 @@ public class Player : MonoBehaviour
         {
             RotateObject();
         }
+
+        if(HandBoxPosition.childCount>0)
+        {
+            if (isboxinhand)
+                return;
+            foreach(GameObject o in SavingSystem.Instance.IntanSavingList)
+            {
+                if (!o.CompareTag("Item")&&o.GetComponent<BoxCollider>())
+                    o.GetComponent<BoxCollider>().enabled = false;
+            }
+            isboxinhand = true;
+        }
+        else
+        {
+
+            if (HandBoxPosition.childCount == 0 && isboxinhand)
+            {
+               
+                foreach (GameObject o in SavingSystem.Instance.IntanSavingList)
+                {
+                    if (o.GetComponent<BoxCollider>())
+                        o.GetComponent<BoxCollider>().enabled = true;
+                }
+                isboxinhand = false;
+            }
+
+       }
     }
+
+    bool isboxinhand;
 
     private void RayCastFunction()
     {
         if (FPS_Camera.activeSelf && Physics.Raycast(FPS_Camera.transform.position, FPS_Camera.transform.forward, out _hitInfo, rayDistance))
+            //,~LayerMask.GetMask("TriggerLayer"), QueryTriggerInteraction.Ignore))
         {
             Debug.DrawRay(FPS_Camera.transform.position, FPS_Camera.transform.forward * _hitInfo.distance, Color.red);
 
@@ -82,29 +143,63 @@ public class Player : MonoBehaviour
                 SpawnObject.transform.position = _hitInfo.point;
                 //SpawnObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, _hitInfo.normal);
 
-                if (SpawnObject.GetComponent<ColiisionDecision>().isColliding)
+                if (SpawnObject.GetComponent<FurnishItem>().Name == "CashCounter")
                 {
-                    SpawnObject.GetComponent<MeshRenderer>().material = red;
-                    PlaceBtn.SetActive(false);
-                }
-                else
+                    print("founds3");
+                    if(SpawnObject.GetComponent<FurnishItem>().targetGreenMesh.GetComponent<ColiisionDecision>().isColliding)
+                    {
+                        canPlace = false;
+                        PlaceBtn.SetActive(false);
+                        SpawnObject.GetComponent<FurnishItem>().targetGreenMesh.GetComponent<MeshRenderer>().material = red;
+                    }
+                    else
+                    {
+                        canPlace = true;
+                        PlaceBtn.SetActive(true);
+                        print("founds2");
+                        SpawnObject.GetComponent<FurnishItem>().targetGreenMesh.GetComponent<MeshRenderer>().material = green;
+                    }
+                    
+
+
+                }else
                 {
-                    SpawnObject.GetComponent<MeshRenderer>().material = green;
-                    PlaceBtn.SetActive(true);
+                    if (SpawnObject.GetComponent<ColiisionDecision>().isColliding)
+                    {
+                        canPlace = false;
+                        SpawnObject.GetComponent<MeshRenderer>().material = red;
+                        PlaceBtn.SetActive(false);
+                    }
+                    else
+                    {
+                        canPlace = true;
+                        SpawnObject.GetComponent<MeshRenderer>().material = green;
+                        PlaceBtn.SetActive(true);
+                       
+                    }
                 }
+                
             }
 
             if (_hitInfo.transform)
             {
                 Current_Interated_Obj = _hitInfo.collider.gameObject;
-                if (Current_Interated_Obj.CompareTag("Click") || Current_Interated_Obj.CompareTag("Pick"))
+                if (Current_Interated_Obj.CompareTag("Click") || Current_Interated_Obj.CompareTag("Item") || Current_Interated_Obj.CompareTag("Pick"))
                 {
                     ClickBtn.SetActive(true);
-
+                   /// MinusDolllarBtn.SetActive(false);
+                   // ReplaceBtn.SetActive(true);
+                }
+                else if (Current_Interated_Obj.name == "Dollar" && isOnCashMachine)//Usama
+                {
+                    ClickBtn.SetActive(true);
+                   
                 }
                 else
                 {
+                    ReplaceBtn.SetActive(false);
                     ClickBtn.SetActive(false);
+                   // MinusDolllarBtn.SetActive(false);
                 }
 
             }
@@ -118,6 +213,7 @@ public class Player : MonoBehaviour
             if (Current_Interated_Obj.name == "Cash_Machine")
             {
                 cash_Machine = Current_Interated_Obj.GetComponent<Cash_Machine>();
+                CashController = Current_Interated_Obj.GetComponent<CashDrawerWorking>();
                 FPS_Player.transform.parent = cash_Machine.positionOnChair.transform;
                 cash_Machine.IntractCollider.enabled = false;
                 FPS_Player.transform.localPosition = Vector3.zero;
@@ -126,6 +222,29 @@ public class Player : MonoBehaviour
                 FPS_Btns.SetActive(false);
                 ExitBtn.SetActive(true);
                 isOnCashMachine = true;
+            }else if(Current_Interated_Obj.name == "place")
+            {
+                EditPricePanal.SetActive(true);
+                EditPrice editPanla = EditPricePanal.GetComponent<EditPrice>();
+                GameObject parent = Current_Interated_Obj.transform.parent.gameObject;
+                GameObject child = Current_Interated_Obj.transform.GetChild(0).gameObject;
+
+                GameObject currentProduct = parent.GetComponent<ShelfPlacement>().currentProduct;
+                editPanla.image.sprite = currentProduct.GetComponent<item>().sprite;
+                editPanla.Name.text = currentProduct.GetComponent<item>().Name;
+
+                editPanla.buyingPrice.text = (currentProduct.GetComponent<item>().Unit_Price * 12).ToString();
+                //editPanla.sellingPrice.text = (currentProduct.GetComponent<item>().Unit_Price * 12).ToString();
+                editPanla.sellingPrice.text = parent.GetComponent<ShelfPlacement>().GrossPrice.ToString();
+                float per = ((currentProduct.GetComponent<item>().Unit_Price * 12) * 10)/ 100;
+                editPanla.competitivePrice.text = "COMPETITIVE PRICE " + ((currentProduct.GetComponent<item>().Unit_Price * 12) + per).ToString();
+
+            }
+            else if (Current_Interated_Obj.name == "Dollar" && isOnCashMachine)
+            {
+             
+                float dollar = Current_Interated_Obj.GetComponent<DollarPrice>().DollarValue;
+                CashController.UpdateGivingAmount(dollar);
             }
             else if (Current_Interated_Obj.name == "ATM")
             {
@@ -149,9 +268,17 @@ public class Player : MonoBehaviour
                 string objectname = Current_Interated_Obj.GetComponent<item>().Name;
                 if (objectname == "Box")
                 {
+                    DropBtn.SetActive(true);
+                    if (Current_Interated_Obj.GetComponent<Rigidbody>())
+                    {
+                        Destroy(Current_Interated_Obj.GetComponent<Rigidbody>());
+                       
+                    }
                     Current_Interated_Obj.transform.SetParent(HandBoxPosition);
                     Current_Interated_Obj.transform.localPosition = Vector3.zero;
-                    Current_Interated_Obj.transform.localRotation = Quaternion.Euler(0, 90, 0); ;
+                    Current_Interated_Obj.transform.localRotation = Quaternion.Euler(0, 90, 0);
+                    if(!Current_Interated_Obj.GetComponent<BoxAddRemove>().isOpenBox)
+                    OpenBoxButton.SetActive(true);
 
                 }
                 if (objectname == "ShelfBox")
@@ -162,6 +289,8 @@ public class Player : MonoBehaviour
 
                     if (HandBoxPosition.childCount > 0)
                     {
+                        if (!HandBoxPosition.GetChild(0).GetComponent<BoxAddRemove>().isOpenBox)
+                            return;
                         BoxAddRemove boxScript= HandBoxPosition.GetChild(0).GetComponent<BoxAddRemove>();
                         if (!boxScript)
                               return;
@@ -176,19 +305,38 @@ public class Player : MonoBehaviour
                             GameObject o = HandBoxPosition.GetChild(0).GetComponent<BoxAddRemove>().RemoveProduct();
                             if (o)
                             {
+                                CUSTOMERITEMS.shelvesItem.Add(o.transform);
                                 Current_Interated_Obj.GetComponent<ShelfPlacement>().AddProduct(o);
                             }
                         }
                         else
                         {
-                            print("out is this work");
+                         
                             if (!(shelf.GetComponent<item>().Display == boxScript.Product.GetComponent<item>().Display))
                                 return;
-                            print("Print is this work");
+                            if(shelf.currentProduct)
+                            if (shelf.currentProduct.GetComponent<item>().Name != boxScript.Product.GetComponent<item>().Name)
+                                return;
+                          
                             GameObject o = HandBoxPosition.GetChild(0).GetComponent<BoxAddRemove>().RemoveProduct();
                             if (o)
                             {
+                                CUSTOMERITEMS.shelvesItem.Add(o.transform);
                                 Current_Interated_Obj.GetComponent<ShelfPlacement>().AddProduct(o);
+
+                                if(Current_Interated_Obj.GetComponent<ShelfPlacement>().currentProduct)
+                                {
+                                    Current_Interated_Obj.GetComponent<ShelfPlacement>().Tag.SetActive(true);
+                                    Current_Interated_Obj.GetComponent<ShelfPlacement>().Tag.transform.GetChild(0).GetComponent<Tag>().price.text = "$"+
+                                    Current_Interated_Obj.GetComponent<ShelfPlacement>().currentProduct.GetComponent<item>().Gross_Price.ToString();
+
+
+                                    Current_Interated_Obj.GetComponent<ShelfPlacement>().Tag.transform.GetChild(0).GetComponent<Tag>().image.sprite =
+                                        Current_Interated_Obj.GetComponent<ShelfPlacement>().currentProduct.GetComponent<item>().sprite;
+                                }
+
+
+
                             }
                         }
                     }
@@ -198,14 +346,50 @@ public class Player : MonoBehaviour
                 {
                     if (HandBoxPosition.childCount > 0)
                     {
-                        Destroy(HandBoxPosition.GetChild(0).GetComponent<Box>().gameObject);
+                        Destroy(HandBoxPosition.GetChild(0).gameObject);
+                        DropBtn.SetActive(false);
+                        OpenBoxButton.SetActive(false);
 
                     }
 
                 }
+                
 
             }
+            //Usama.......
+            else if (Current_Interated_Obj.name == "Money" && isOnCashMachine)
+            {
+                CashController.UpdateCashPanel(TotalPayment, ConfirmPayment);
+                //CashController.UpdateCashPanel(54.65f, ConfirmPayment);
+                  PedesterienIKA IKaAnim= Current_Interated_Obj.GetComponentInParent<PedesterienIKA>();
+                if (IKaAnim)
+                {
+                    IKaAnim.rightHandObj = null;
+                    IKaAnim.ikActive = false;
+                }
+                Animator animplay = Current_Interated_Obj.GetComponentInParent<Animator>();
+                if(animplay)
+                {
+                    animplay.Play("Idle_Bag");
+                }
+                MinusDolllarBtn.SetActive(true);
+                Current_Interated_Obj.SetActive(false);
 
+            }
+            else if (Current_Interated_Obj.name == "Shop")
+            {
+                if (!DayTime.open)
+                {
+                    DayTime.open = true;
+                    Current_Interated_Obj.GetComponent<TextMeshPro>().color = Color.green;
+                    Current_Interated_Obj.GetComponent<TextMeshPro>().text = "Open";
+                }
+               /* else
+                {
+                    CustomerManager.Shop = true;
+                    Current_Interated_Obj.GetComponent<TextMeshProUGUI>().text = "Open";
+                }*/
+            }
         }
         else if (Current_Interated_Obj.CompareTag("Pick"))
         {
@@ -216,35 +400,222 @@ public class Player : MonoBehaviour
                 print("Temp is = " + TempPlaceObject);
                 SpawnObject = Instantiate(TempPlaceObject);
                 SpawnObject.SetActive(true);
+                if(SpawnObject.GetComponent<FurnishItem>())
+                {
+                    SpawnObject.name = SpawnObject.GetComponent<FurnishItem>().Name;
+                }
+                
                 OriginalMat = SpawnObject.GetComponent<MeshRenderer>().material;
                 box.SetActive(false);
                 SpawnObject.layer = 2;
                 SpawnObject.GetComponent<MeshRenderer>().material = red;
+                
                 SpawnObject.AddComponent<ColiisionDecision>();
                 SpawnObject.GetComponent<FurnishItem>().offSetCollider.enabled = true;
                 PlaceBtn.SetActive(true);
                 RotateBtn.SetActive(true);
+
+                if(SpawnObject.GetComponent<FurnishItem>().Name == "CashCounter")
+                {
+                    print("founds");
+                    OriginalMat = SpawnObject.GetComponent<FurnishItem>().targetGreenMesh.GetComponent<MeshRenderer>().material;
+                    SpawnObject.GetComponent<FurnishItem>().targetGreenMesh.GetComponent<MeshRenderer>().material = red;
+                    SpawnObject.GetComponent<FurnishItem>().targetGreenMesh.AddComponent<ColiisionDecision>();
+                    SpawnObject.GetComponent<FurnishItem>().targetGreenMesh.layer = 2;
+                    foreach (GameObject val in SpawnObject.GetComponent<FurnishItem>().childs)
+                    {
+                        if(val.GetComponent<Collider>())
+                        {
+                            val.GetComponent<Collider>().enabled = false;
+                            val.layer = 2;
+                        }
+                    }
+
+                }
+                else
+                {
+                    print(SpawnObject.GetComponent<FurnishItem>().Name);
+                }
             }
+        }
+        else if (Current_Interated_Obj.CompareTag("Item") && isOnCashMachine)
+        {
+            GeneratringBilll(Current_Interated_Obj.GetComponent<item>());
+            StartCoroutine(MoveInParabola(Current_Interated_Obj.transform, cash_Machine.transform.GetChild(0).position, 1f, 0.4f));
+        }
+       
+    }
+    /// <summary>
+    ///          ///  Bill generate //Usama
+    /// </summary>
+    /// 
 
+    public void OnClcikReplaceBtn()
+    {
+        if (Current_Interated_Obj.CompareTag("Pick"))
+        {
+            if (Current_Interated_Obj.name == "Shelf")
+            {
+                SpawnObject = Current_Interated_Obj;
+                SpawnObject.SetActive(true);
+                
+                OriginalMat = SpawnObject.GetComponent<MeshRenderer>().material;
+                SpawnObject.layer = 2;
+                SpawnObject.GetComponent<MeshRenderer>().material = red;
 
+                SpawnObject.AddComponent<ColiisionDecision>();
+                SpawnObject.GetComponent<FurnishItem>().offSetCollider.enabled = true;
+                PlaceBtn.SetActive(true);
+                RotateBtn.SetActive(true);
 
+                foreach(var val in SpawnObject.GetComponent<FurnishItem>().childs)
+                {
+                    val.GetComponent<Collider>().enabled = false;
+                }
+
+                if (SpawnObject.GetComponent<FurnishItem>().Name == "CashCounter")
+                {
+                    OriginalMat = SpawnObject.GetComponent<FurnishItem>().targetGreenMesh.GetComponent<MeshRenderer>().material;
+                    SpawnObject.GetComponent<FurnishItem>().targetGreenMesh.GetComponent<MeshRenderer>().material = red;
+                    SpawnObject.GetComponent<FurnishItem>().targetGreenMesh.AddComponent<ColiisionDecision>();
+                    foreach (GameObject val in SpawnObject.GetComponent<FurnishItem>().childs)
+                    {
+                        if (val.GetComponent<Collider>())
+                        {
+                            val.layer = 2;
+                        }
+                    }
+
+                }
+                else
+                {
+                    print(SpawnObject.GetComponent<FurnishItem>().Name);
+                }
+            }
+        }
+    }
+    public void GeneratringBilll(item DetailedObj)
+    {
+        int unit = 1;
+        bool Exist = false;
+        foreach (item items in PurchasedItem)
+        {
+            if (items == DetailedObj)
+            {
+                unit++;
+            }
+        }
+        string ItemName = DetailedObj.Name;
+        float ItemPrice = DetailedObj.Gross_Price;
+        int Quantity = unit;
+        float Totalprice = unit * ItemPrice;
+        TotalPayment += ItemPrice;
+        if (!PurchasedItem.Contains(DetailedObj))
+        {
+            PurchasedItem.Add(DetailedObj);
+        }
+
+        foreach (GameObject obj in PurchasedItemDetail)
+        {
+            string ObjName = obj.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text;
+            if (ObjName == ItemName)
+            {
+                obj.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = Quantity.ToString();
+                obj.transform.GetChild(3).gameObject.GetComponent<TextMeshProUGUI>().text = Totalprice.ToString();
+                Exist = true;
+            }
+        }
+        if (!Exist)
+        {
+            GameObject DeatilPrefab = Instantiate(prefabItemDetailinBill);
+            DeatilPrefab.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = ItemName.ToString();
+            DeatilPrefab.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = Quantity.ToString();
+            DeatilPrefab.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = ItemPrice.ToString();
+            DeatilPrefab.transform.GetChild(3).gameObject.GetComponent<TextMeshProUGUI>().text = Totalprice.ToString();
+            DeatilPrefab.transform.parent = cash_Machine.DetailingPanel;
+            DeatilPrefab.transform.localScale = new Vector3(1, 1, 1);
+            DeatilPrefab.transform.localRotation = Quaternion.identity;
+            DeatilPrefab.transform.localPosition = new Vector3(DeatilPrefab.transform.position.x, DeatilPrefab.transform.position.y, 0);
+            PurchasedItemDetail.Add(DeatilPrefab);
+        }
+        cash_Machine.BillAmount.text = TotalPayment.ToString();
+      
+    }
+
+    public void MinusDollorAmount()
+    {
+        CashController.UndoRGivingAmount();
+    }
+    public void OnClickOpenBoxBtn()
+    {
+        if (HandBoxPosition.childCount > 0)
+        {
+            if (BoxOpen != null)
+            {
+                Sound.clip = BoxOpen;
+                Sound.Play();
+            }
+            HandBoxPosition.GetChild(0).GetComponent<BoxAddRemove>().boxopen();
+            OpenBoxButton.SetActive(false);
         }
     }
 
     public void onClickPlaceBtn()
     {
-        PlaceBtn.SetActive(false);
-        RotateBtn.SetActive(false);
-        SpawnObject.GetComponent<MeshRenderer>().material = OriginalMat;
-        SpawnObject.layer = 0;
-        Destroy(SpawnObject.GetComponent<ColiisionDecision>());
-        Destroy(SpawnObject.GetComponent<Rigidbody>());
-        /*TempPlaceObject.SetActive(true);
-        TempPlaceObject.transform.position = SpawnObject.transform.position;
-        TempPlaceObject.transform.rotation = SpawnObject.transform.rotation;
-        Destroy(SpawnObject);*/
-        SpawnObject = null;
-        TempPlaceObject = null;
+        if(canPlace)
+        {
+            PlaceBtn.SetActive(false);
+            RotateBtn.SetActive(false);
+            SpawnObject.GetComponent<MeshRenderer>().material = OriginalMat;
+            if (SpawnObject.GetComponent<FurnishItem>())
+            {
+                foreach (GameObject val in SpawnObject.GetComponent<FurnishItem>().childs)
+                {
+                    if(val.GetComponent<Collider>())
+                        val.GetComponent<Collider>().enabled = true;
+                }
+            }
+            if (SpawnObject.GetComponent<FurnishItem>().Name == "CashCounter")
+            {
+                SpawnObject.GetComponent<FurnishItem>().targetGreenMesh.GetComponent<MeshRenderer>().material = OriginalMat;
+                SpawnObject.GetComponent<FurnishItem>().targetGreenMesh.layer = 0;
+                foreach (GameObject val in SpawnObject.GetComponent<FurnishItem>().childs)
+                {
+                    if (val.GetComponent<Collider>())
+                    {
+                        val.GetComponent<Collider>().enabled = true;
+                        val.layer = 0;
+                    }
+                }
+            }
+            if(SpawnObject.GetComponent<FurnishItem>().offSetCollider)
+            {
+                SpawnObject.GetComponent<FurnishItem>().offSetCollider.enabled = false;
+            }
+            if (SpawnObject.GetComponent<FurnishItem>().bigCollider)
+            {
+                SpawnObject.GetComponent<FurnishItem>().bigCollider.enabled = true;
+            }
+            SpawnObject.layer = 0;
+
+            if (!SavingSystem.Instance.IntanSavingList.Contains(SpawnObject))
+                SavingSystem.Instance.IntanSavingList.Add(SpawnObject);
+            Sound.clip = place;
+            Sound.Play();
+            Destroy(SpawnObject.GetComponent<ColiisionDecision>());
+            Destroy(SpawnObject.GetComponent<Rigidbody>());
+
+
+
+            /*TempPlaceObject.SetActive(true);
+            TempPlaceObject.transform.position = SpawnObject.transform.position;
+            TempPlaceObject.transform.rotation = SpawnObject.transform.rotation;
+            Destroy(SpawnObject);*/
+            SpawnObject = null;
+            TempPlaceObject = null;
+            canPlace = false;
+        }
+        
     }
 
     public void OnClickExitBtn()
@@ -299,7 +670,7 @@ public class Player : MonoBehaviour
         while (isRotatingObject)
         {
             //moveWheelRotation += ControlFreak2.CF2Input.mouseScrollDelta.y;
-            moveWheelRotation = (moveWheelRotation + Time.deltaTime);
+            moveWheelRotation = Time.deltaTime;//(moveWheelRotation + Time.deltaTime);
             if (moveWheelRotation > 50)
             {
                 moveWheelRotation = 50;
@@ -329,5 +700,107 @@ public class Player : MonoBehaviour
         canRotate = false;
     }
 
+    #endregion
+    #region   Usama
+
+
+
+    public void ConfirmPaymentFunc()
+    {
+        foreach (GameObject obj in PurchasedItemDetail)
+        {
+            Destroy(obj);
+        }
+
+        UpdatePlayerMoney(TotalPayment);
+        DayTotalPayment += TotalPayment;
+        TotalPayment = 0;
+        PurchasedItemDetail.Clear();
+        PurchasedItem.Clear();
+        Sound.clip = Money;
+        Sound.Play();
+        if (CharacterAtCashMachine != null)
+        {
+            CharacterAtCashMachine.MoveBack();
+        }
+        if (CUSTOMERITEMS.InstantiatedObj.Contains(CharacterAtCashMachine.gameObject))
+        {
+            CUSTOMERITEMS.InstantiatedObj.Remove(CharacterAtCashMachine.gameObject);
+        }
+        MinusDolllarBtn.SetActive(false);
+        cash_Machine.BillAmount.text = TotalPayment.ToString();
+
+    }
+    public void onClickDropBtn()
+    {
+        if(HandBoxPosition.childCount>0)
+        {
+           
+            HandBoxPosition.GetChild(0).gameObject.AddComponent<AddRemoveRigidbody>();
+            HandBoxPosition.GetChild(0).parent = null;
+            DropBtn.SetActive(false);
+            OpenBoxButton.SetActive(false);
+        }
+        
+    }
+    public void UpdatePlayerMoney(float amount)
+    {
+        PlayerAmount += amount;
+        PlayerMoneyText.text = "$" + PlayerAmount;
+        PlayerPrefs.SetFloat("Money", PlayerAmount);
+        print("New Price is = " + PlayerAmount);
+    }
+
+    ///
+    ///
+    /// // Coroutine that moves a Transform in a parabolic arc
+    public IEnumerator MoveInParabola(Transform objectToMove, Vector3 targetPosition, float duration, float arcHeight)
+    {
+        Vector3 startPosition = objectToMove.position; // Initial position
+        float timeElapsed = 0f;
+        Sound.clip = Swap;
+        Sound.Play();
+        while (timeElapsed < duration)
+        {
+            timeElapsed += Time.deltaTime;
+            float t = timeElapsed / duration; // Normalize time to [0,1]
+
+            // Linear interpolation between start and target positions
+            Vector3 currentPosition = Vector3.Lerp(startPosition, targetPosition, t);
+
+            // Adding the parabolic height to the Y-axis using a sine function for smoother motion
+            float heightOffset = Mathf.Sin(t * Mathf.PI) * arcHeight;
+
+            // Set the current position with the height offset
+            currentPosition.y += heightOffset;
+
+            // Apply the new position
+            objectToMove.position = currentPosition;
+
+            yield return null; // Wait for the next frame
+        }
+
+        // Ensure the object reaches the target position at the end
+        objectToMove.position = targetPosition;
+        // Destroy(objectToMove.gameObject);
+        CashMachine Cashmachine = cash_Machine.gameObject.GetComponent<CashMachine>();
+        if (Cashmachine)
+        {
+            if (Cashmachine.waitingCustomers.Count > 0)
+            {
+                GameObject HoldingObj = Cashmachine.waitingCustomers[0].gameObject;
+                if (HoldingObj.GetComponent<CharcaterBehaviour>())
+                {
+                    print("Object Found");
+                    CharacterAtCashMachine = HoldingObj.GetComponent<CharcaterBehaviour>();
+                    if (HoldingObj.GetComponent<CharcaterBehaviour>().CharcaterHoldingItem.Contains(objectToMove.gameObject))
+                    {
+                        HoldingObj.GetComponent<CharcaterBehaviour>().CharcaterHoldingItem.Remove(objectToMove.gameObject);
+                    }
+                }
+            }
+        }
+        Destroy(objectToMove.gameObject);
+    }
     #endregion
 }

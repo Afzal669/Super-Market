@@ -5,6 +5,7 @@ public class BoxAddRemove : MonoBehaviour
 {
     public List<Transform> BoxList = new List<Transform>();
     public GameObject Product;
+    public bool isOpenBox;
     [SerializeField] BoxLid Boxdoor;
     [SerializeField] BoxLid Boxdoor1;
     public void AddProduct(GameObject product)
@@ -37,6 +38,7 @@ public class BoxAddRemove : MonoBehaviour
             {
                 GameObject o = BoxList[BoxList.Count - 1].gameObject;
                 o.transform.SetParent(null);
+                print(o.transform.localScale);
                 BoxList.RemoveAt(BoxList.Count - 1);
                 return o;
             }
@@ -53,6 +55,7 @@ public class BoxAddRemove : MonoBehaviour
 
     public void boxopen()
     {
+        isOpenBox = true;
          Boxdoor.OpenLid();
         Boxdoor1.OpenLid();
     }

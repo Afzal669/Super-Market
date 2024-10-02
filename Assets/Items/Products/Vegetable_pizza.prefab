@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3739352907824167755}
   m_Layer: 0
   m_Name: Vegetable_pizza
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 557152540174870219}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 1a733315a2f3fa848aad913a0676c1f9, type: 3}
   Name: 
   Unit_Price: 6
   Space: 12
@@ -110,7 +110,7 @@ BoxCollider:
   m_GameObject: {fileID: 557152540174870219}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.32904702, y: 0.32904702, z: 0.033748463}
   m_Center: {x: 0, y: 0.16452351, z: 0.00000002514571}

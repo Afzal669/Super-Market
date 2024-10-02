@@ -7,6 +7,7 @@ TagManager:
   - TrafficCar
   - Click
   - Pick
+  - Item
   layers:
   - Default
   - TransparentFX

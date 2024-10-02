@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -2127879641170065214}
   m_Layer: 0
   m_Name: Nachos_cheese
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 6748668385763012112}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 2e41472d494303545a725b60f2bded36, type: 3}
   Name: 
   Unit_Price: 7
   Space: 12
@@ -110,7 +110,7 @@ BoxCollider:
   m_GameObject: {fileID: 6748668385763012112}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.29495347, y: 0.30622187, z: 0.17381424}
   m_Center: {x: -0.00041597337, y: 0.15105076, z: 0.00006037578}

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3571629802476105093}
   m_Layer: 0
   m_Name: Chips_barbecue
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 4695321299381894592}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 2fa8a3e3ab9816d4281381478ae0e4d4, type: 3}
   Name: 
   Unit_Price: 4.67
   Space: 12
@@ -110,7 +110,7 @@ BoxCollider:
   m_GameObject: {fileID: 4695321299381894592}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.18231812, y: 0.30396703, z: 0.13673797}
   m_Center: {x: 0.0010641553, y: 0.14916398, z: -0.0026714914}

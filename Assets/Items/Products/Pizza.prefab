@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -8865914282810599918}
   m_Layer: 0
   m_Name: Pizza
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 5110111404696783513}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: f8b6c98e38ddf5842bd22d3c1174aa99, type: 3}
   Name: 
   Unit_Price: 7
   Space: 12
@@ -110,7 +110,7 @@ BoxCollider:
   m_GameObject: {fileID: 5110111404696783513}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.2877636, y: 0.2877636, z: 0.02951426}
   m_Center: {x: 0, y: 0.1438818, z: 0.000000022351742}

@@ -54,5 +54,11 @@ public class FurnitureCard : MonoBehaviour
         
         //TotalPrice.text = "$" + (quantity * Unit_Price).ToString();
     }
+    public void ResetData()
+    {
+        quantity = 0;
+        Quantity.text = quantity.ToString();
+       
+    }
 
 }

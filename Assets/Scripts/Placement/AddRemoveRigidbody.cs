@@ -14,7 +14,7 @@ public class AddRemoveRigidbody : MonoBehaviour
         else
         {
             rb = gameObject.AddComponent<Rigidbody>();
-            rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
+           // rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
 
         }
 
@@ -23,7 +23,7 @@ public class AddRemoveRigidbody : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
   
-            Invoke(nameof(RemoveRbAndScript), 2f);
+          //  Invoke(nameof(RemoveRbAndScript), 4f);
     }
     
 

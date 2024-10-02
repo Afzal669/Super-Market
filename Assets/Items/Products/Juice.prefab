@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: -4822273287615883088}
   m_Layer: 0
   m_Name: Juice
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 65
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &442968
 Transform:
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 168268}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: f48a4c18e51bea94c8cbe8ea71b4658e, type: 3}
   Name: 
   Unit_Price: 8
   Space: 12
@@ -110,7 +110,7 @@ BoxCollider:
   m_GameObject: {fileID: 168268}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.09236717, y: 0.27356374, z: 0.104255676}
   m_Center: {x: 0.0000009536743, y: 0.13678187, z: 0}

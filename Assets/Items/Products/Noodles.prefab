@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6170252801898723454}
   m_Layer: 0
   m_Name: Noodles
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 2339155236828463329}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: a9fccd9c214a12a4689a876e59d5113b, type: 3}
   Name: 
   Unit_Price: 2.65
   Space: 12
@@ -110,7 +110,7 @@ BoxCollider:
   m_GameObject: {fileID: 2339155236828463329}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.39, y: 0.33343536, z: 0.079371944}
   m_Center: {x: 0, y: 0.16671768, z: 0.000000026077032}

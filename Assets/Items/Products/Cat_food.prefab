@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -6155463324524610801}
   m_Layer: 0
   m_Name: Cat_food
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 6253431567770286488}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: ecf85193a0a142b4abb6eec6f7c4554c, type: 3}
   Name: 
   Unit_Price: 9
   Space: 12
@@ -110,7 +110,7 @@ BoxCollider:
   m_GameObject: {fileID: 6253431567770286488}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.14087161, y: 0.234128, z: 0.106128596}
   m_Center: {x: -0.0009783693, y: 0.114695564, z: 0.0007042363}

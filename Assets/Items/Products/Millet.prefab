@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: 7507112437848553055}
   m_Layer: 0
   m_Name: Millet
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 65
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &414722
 Transform:
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 0}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 32dfc43c0a8d51648a3b3a4d753c06aa, type: 3}
   Name: 
   Unit_Price: 9.45
   Space: 12
@@ -110,7 +110,7 @@ BoxCollider:
   m_GameObject: {fileID: 157496}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.096853256, y: 0.25408223, z: 0.20233917}
   m_Center: {x: -0.0000009536743, y: 0.12704112, z: 0}

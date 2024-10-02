@@ -57,4 +57,11 @@ public class CardItem : MonoBehaviour
         TotalPrice.text = "$ " + Unit_Price;
         //TotalPrice.text = "$" + (quantity * Unit_Price).ToString();
     }
+
+    public void ResetData()
+    {
+        quantity = 0;
+        Quantity.text = quantity.ToString();
+
+    }
 }

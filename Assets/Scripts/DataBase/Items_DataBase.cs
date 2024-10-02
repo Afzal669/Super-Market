@@ -28,6 +28,12 @@ public class Items_DataBase : MonoBehaviour
 
     public List<GameObject> AllItems;
     public item itemScript;
+    public static Items_DataBase Instance;
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+    }
     void Start()
     {
 
@@ -56,7 +62,7 @@ public class Items_DataBase : MonoBehaviour
             cardItemScritp = currentCard.GetComponent<CardItem>();
             cardItemScritp.Name.text = item.Name;
             cardItemScritp.Image.sprite = item.Sprite;
-            cardItemScritp.Unit_Price = item.UnitPrice;
+            cardItemScritp.Unit_Price = item.UnitPrice * 12f;
             cardItemScritp.Space = item.Space;
             cardItemScritp.PrefrabsItem = item.Prefab;
             if(item.Display == Type.Fridge)
@@ -66,7 +72,7 @@ public class Items_DataBase : MonoBehaviour
             {
                 cardItemScritp.Display = 0;
             }
-            
+            ShopManagment.instance.AllProductsCardsCounters.Add(currentCard);
 
         }
     }

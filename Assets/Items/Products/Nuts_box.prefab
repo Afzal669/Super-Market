@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -6313616537855853738}
   m_Layer: 0
   m_Name: Nuts_box
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 2114480809723011967}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: a2a569373b73ddc4ab67531eb8f63df9, type: 3}
   Name: 
   Unit_Price: 16.88
   Space: 12
@@ -110,7 +110,7 @@ BoxCollider:
   m_GameObject: {fileID: 2114480809723011967}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.32370853, y: 0.33090204, z: 0.17264462}
   m_Center: {x: 0, y: 0.16545102, z: 0.000000026077032}

@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: 2129891825569842919}
   m_Layer: 0
   m_Name: Red_juice_bottle
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 65
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &404236
 Transform:
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 108130}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 7fedf963d9719fa4e8879814139ab34c, type: 3}
   Name: 
   Unit_Price: 11
   Space: 12
@@ -110,7 +110,7 @@ BoxCollider:
   m_GameObject: {fileID: 108130}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.11325455, y: 0.3937169, z: 0.13077545}
   m_Center: {x: 0, y: 0.19685845, z: 0}

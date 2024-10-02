@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: -2539619840492209532}
   m_Layer: 0
   m_Name: Meat
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 65
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &430590
 Transform:
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 131932}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: f741aca63aed1be4a831f609433f3814, type: 3}
   Name: 
   Unit_Price: 16.78
   Space: 12
@@ -110,7 +110,7 @@ BoxCollider:
   m_GameObject: {fileID: 131932}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.8847208, y: 0.061320126, z: 0.3397522}
   m_Center: {x: -0.00000047683716, y: 0.030660063, z: 0}

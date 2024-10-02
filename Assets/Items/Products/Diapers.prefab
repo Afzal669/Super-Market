@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -1332110654390045202}
   m_Layer: 0
   m_Name: Diapers
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 1638547926956378690}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 6c1a6a686f3ddd14b97c4537352018ae, type: 3}
   Name: 
   Unit_Price: 21
   Space: 12
@@ -110,7 +110,7 @@ BoxCollider:
   m_GameObject: {fileID: 1638547926956378690}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.33404192, y: 0.33407405, z: 0.16725852}
   m_Center: {x: 0.000012099743, y: 0.1669013, z: -0.0000014081597}

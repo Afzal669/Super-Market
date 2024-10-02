@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -2292754277725616784}
   m_Layer: 0
   m_Name: Watermelons
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 5690060842647206776}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 46bba5d2d00393f4186aeeae06a1e192, type: 3}
   Name: 
   Unit_Price: 5.3
   Space: 12
@@ -110,7 +110,7 @@ BoxCollider:
   m_GameObject: {fileID: 5690060842647206776}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.45542127, y: 0.29268795, z: 0.29379326}
   m_Center: {x: -0.006939158, y: 0.1443047, z: -0.0004230067}

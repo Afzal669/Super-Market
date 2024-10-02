@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4510962498831127457}
   m_Layer: 0
   m_Name: Black_bottle_small
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 6682634809045891161}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 68752c41419696546a364f9f0e98330f, type: 3}
   Name: 
   Unit_Price: 4.5
   Space: 12
@@ -110,7 +110,7 @@ BoxCollider:
   m_GameObject: {fileID: 6682634809045891161}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.07378677, y: 0.25122988, z: 0.073786765}
   m_Center: {x: -0.000000007450581, y: 0.12561494, z: 0.000000020489097}

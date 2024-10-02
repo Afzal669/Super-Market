@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2027756031891541159}
   m_Layer: 0
   m_Name: Chips_Flaming_hot
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 895214189164302961}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 0e9968519b334b84d8be48b628f1e797, type: 3}
   Name: 
   Unit_Price: 4.88
   Space: 12
@@ -110,7 +110,7 @@ BoxCollider:
   m_GameObject: {fileID: 895214189164302961}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.182773, y: 0.30292046, z: 0.13787106}
   m_Center: {x: 0.00083651394, y: 0.14899603, z: -0.0007359348}

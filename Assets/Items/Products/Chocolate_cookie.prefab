@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: -3350619419637399252}
   m_Layer: 0
   m_Name: Chocolate_cookie
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 65
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &455690
 Transform:
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Self: {fileID: 121600}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: e31fb5753c0845d418a359e9ca99d463, type: 3}
   Name: 
   Unit_Price: 4.784
   Space: 12
@@ -110,7 +110,7 @@ BoxCollider:
   m_GameObject: {fileID: 121600}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.08192921, y: 0.23807836, z: 0.13342667}
   m_Center: {x: 0.00000047683716, y: 0.11903918, z: -0.0000019073486}

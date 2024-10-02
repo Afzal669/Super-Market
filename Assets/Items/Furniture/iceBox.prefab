@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7187328982851027943}
   - component: {fileID: 7187328982851027936}
   - component: {fileID: 7187328982851027937}
+  - component: {fileID: 3892482415210737079}
   m_Layer: 0
   m_Name: iceBox
   m_TagString: Pick
@@ -48,9 +49,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b82dd02a257c8084ca29116a3d737036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
+  Name: IceBox
   Unit_Price: 700
   offSetCollider: {fileID: 7187328982851027937}
+  targetGreenMesh: {fileID: 0}
+  childs: []
+  isOnRightPlace: 0
 --- !u!54 &7187328982851027941
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -142,3 +146,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.0000153, y: 0.17640924, z: 2.0402079}
   m_Center: {x: -0.0000009536743, y: 0.08820462, z: -1.0201039}
+--- !u!208 &3892482415210737079
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7187328982851027938}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.08, y: 0.52500004, z: 0.76}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.52500004, z: -0.18}
+  m_TimeToStationary: 0.5
