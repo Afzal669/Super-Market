@@ -117,16 +117,12 @@ public class CustomerManager : MonoBehaviour
              }
             yield return null;  // Wait for the next frame
         }
-
-
-        // "Dismissing"
+    // "Dismissing"
         // Once at the destination, wander around for 15 seconds
         // yield return WanderForSeconds(4,agent);
         Animator animator = agent.gameObject.GetComponent<Animator>(); // Assuming customer has an Animator component
         animator.Play("Dismissing"); // Play Idle animation
         yield return new WaitForSeconds(1.5f);
-
-
 
         // Return to the initial position
         agent.stoppingDistance = 1f;

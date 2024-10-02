@@ -6,7 +6,7 @@ public class FurnishItem : MonoBehaviour
 {
     public string Name;
     public float Unit_Price = 0;
-    public Collider offSetCollider,bigCollider;
+    public Collider offSetCollider,bigCollider,extraCol;
     public GameObject targetGreenMesh;
     public List<GameObject> childs;
 

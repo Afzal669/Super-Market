@@ -37,7 +37,6 @@ public class CashDrawerWorking : MonoBehaviour
         TotalAmount.text = "$" + total.ToString("F2");
         Change = ReceivedAmount - total;
         Change = Mathf.Round(Change * 100f) / 100f;  // Round to 2 decimal places
-        print(" change.... "+ Change);
         ChangeText.text = "$" + Change.ToString("F2"); // Ensure the change is displayed with 2 decimal places
         ConfirmPayment.gameObject.SetActive(true);
         ConfirmPaymentButton = ConfirmPayment;

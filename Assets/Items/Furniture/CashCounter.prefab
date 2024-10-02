@@ -911,6 +911,7 @@ MonoBehaviour:
   Unit_Price: 900
   offSetCollider: {fileID: 822752934767122483}
   bigCollider: {fileID: 8923490752609677570}
+  extraCol: {fileID: 6150515725609838473}
   targetGreenMesh: {fileID: 8923490752609677571}
   childs:
   - {fileID: 8923490752425024939}
@@ -2310,6 +2311,7 @@ GameObject:
   - component: {fileID: 1033211499898591302}
   - component: {fileID: 822752934767122483}
   - component: {fileID: 8923490752609677570}
+  - component: {fileID: 6150515725609838473}
   m_Layer: 0
   m_Name: CashCounter
   m_TagString: Click
@@ -2420,8 +2422,21 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.1492461, y: 0.90440285, z: 5.0756993}
-  m_Center: {x: -0.1603397, y: 0.4522013, z: 0.17459106}
+  m_Size: {x: 0.6528787, y: 0.90440285, z: 5.0756993}
+  m_Center: {x: 0.08784418, y: 0.4522013, z: 0.17459108}
+--- !u!65 &6150515725609838473
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8923490752609677571}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1.3049475, y: 0.90410566, z: 1.5228484}
+  m_Center: {x: -0.11156523, y: 0.45205283, z: 1.9509757}
 --- !u!1 &8923490752609902287
 GameObject:
   m_ObjectHideFlags: 0

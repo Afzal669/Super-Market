@@ -25,6 +25,14 @@ public class InAppFunctions : MonoBehaviour
      GoogleAdMobController.adMobController.ShowBannerAd();
 
     }
+    public void CloseBannerAdd()
+    {
+        GoogleAdMobController.adMobController.HideBannerAd();
+    } 
+    public void ShowBannerAdd()
+    {
+        GoogleAdMobController.adMobController.ShowBannerAd();
+    }
     private void Update()
     {
         #region Ads

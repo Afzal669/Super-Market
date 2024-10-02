@@ -14,7 +14,8 @@ public class EditPrice : MonoBehaviour
     public Image image;
     public float profit = 0;
     public GameObject button;
-
+    public GameObject Warningpanel;
+    public Text Warningpaneltext;
     private void Start()
     {
         // Add a listener for when the value changes in the InputField
@@ -33,16 +34,6 @@ public class EditPrice : MonoBehaviour
     // Example function that you want to call
     private void CustomFunction(string value)
     {
-        float per = (float.Parse(buyingPrice.text.ToString()) * 15) / 100;
-        float val = per + float.Parse(buyingPrice.text.ToString());
-        if(float.Parse(sellingPrice.text.ToString()) > val)
-        {
-            print("More then 15%  "+val);
-            button.SetActive(false);
-        }else
-        {
-            button.SetActive(true);
-        }
 
         Debug.Log("Custom function called with value: " + value);
         profit = float.Parse(sellingPrice.text.ToString()) - float.Parse(buyingPrice.text.ToString());
@@ -50,13 +41,13 @@ public class EditPrice : MonoBehaviour
         {
             sellingProfit.text = profit.ToString();
             sellingProfit.color = Color.green;
-            sellingProfitText.text = "SELLING PROFIT";
+            sellingProfitText.text = " PROFIT";
         }
         else
         {
             sellingProfit.text = profit.ToString();
             sellingProfit.color = Color.red;
-            sellingProfitText.text = "SELLING LOSS";
+            sellingProfitText.text = " LOSS";
         }
     }
 
@@ -68,16 +59,31 @@ public class EditPrice : MonoBehaviour
 
     public void OnClickOkey()
     {
-        Player.instance.EditPricePanal.SetActive(false);
-        GameObject Current_Interated_Obj = Player.instance.Current_Interated_Obj;
 
-        GameObject parent = Current_Interated_Obj.transform.parent.gameObject;
-        GameObject child = Current_Interated_Obj.transform.GetChild(0).gameObject;
+        float per = (float.Parse(buyingPrice.text.ToString()) * 15) / 100;
+        float val = per + float.Parse(buyingPrice.text.ToString());
+        if (float.Parse(sellingPrice.text.ToString()) > val)
+        {
+            Warningpaneltext.text = "Your Selling price is \n Greater than Market \n Competitive Price";
+            Warningpanel.SetActive(true);
+        }
+        else
+        {
+            print("Good");
+
+            Player.instance.EditPricePanal.SetActive(false);
+            GameObject Current_Interated_Obj = Player.instance.Current_Interated_Obj;
+
+            GameObject parent = Current_Interated_Obj.transform.parent.gameObject;
+            GameObject child = Current_Interated_Obj.transform.GetChild(0).gameObject;
+
+            parent.GetComponent<ShelfPlacement>().GrossPrice = float.Parse(sellingPrice.text.ToString());
+            child.GetComponent<Tag>().price.text = "$" + sellingPrice.text;
+
+            parent.GetComponent<ShelfPlacement>().SetGrossValue(parent.GetComponent<ShelfPlacement>().GrossPrice);
+        }
+
         
-        parent.GetComponent<ShelfPlacement>().GrossPrice = float.Parse(sellingPrice.text.ToString());
-        child.GetComponent<Tag>().price.text = "$"+ sellingPrice.text;
-
-        parent.GetComponent<ShelfPlacement>().SetGrossValue(parent.GetComponent<ShelfPlacement>().GrossPrice/12);
          
     }
 }

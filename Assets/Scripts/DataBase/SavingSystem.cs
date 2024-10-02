@@ -76,7 +76,7 @@ public class SavingSystem : MonoBehaviour
     public void LoadGameObjectsData(List<GameObject> prefabList)
     {
         Player.instance.PlayerAmount = PlayerPrefs.GetFloat("Money",5000);
-        Player.instance.PlayerMoneyText.text = Player.instance.PlayerAmount.ToString();
+        Player.instance.PlayerMoneyText.text ="$"+ Player.instance.PlayerAmount.ToString("F2");
         string instantiatedObjInfo = PlayerPrefs.GetString(instantiatedPlayerPrefsKey);
         if (!string.IsNullOrEmpty(instantiatedObjInfo))
         {
@@ -141,6 +141,18 @@ public class SavingSystem : MonoBehaviour
     {
         boxSaving.LoadBoxState();
         LoadGameObjectsData(prefabList);
+    }
+    public void OnExitButtonClick()
+    {
+        // If we are running in the Unity Editor, just stop playing
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        // If running in a build, quit the application
+        Application.Quit();
+         boxSaving.LoadBoxState();
+        LoadGameObjectsData(prefabList);
+#endif
     }
 }
 
