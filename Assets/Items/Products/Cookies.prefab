@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6670706425424773498
+--- !u!1 &6377252931406831113
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9101756203452667695}
-  - component: {fileID: 2746363245303888104}
-  - component: {fileID: 6506205714595665595}
-  - component: {fileID: 4723398316656025347}
-  - component: {fileID: 540049934515907347}
+  - component: {fileID: 437973303604057568}
+  - component: {fileID: 3774917988714414024}
+  - component: {fileID: 2155417886552659230}
+  - component: {fileID: -6103915026238736889}
+  - component: {fileID: -59558370026969246}
   m_Layer: 0
-  m_Name: Milk_bottle_1
+  m_Name: Cookies
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9101756203452667695
+--- !u!4 &437973303604057568
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6670706425424773498}
+  m_GameObject: {fileID: 6377252931406831113}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.024498, y: 0, z: 0.36941096}
+  m_LocalPosition: {x: 6.250949, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2746363245303888104
+--- !u!33 &3774917988714414024
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6670706425424773498}
-  m_Mesh: {fileID: -1526360667375795974, guid: 3878e2a8e5de82042aaa344b5eb5a5f1, type: 3}
---- !u!23 &6506205714595665595
+  m_GameObject: {fileID: 6377252931406831113}
+  m_Mesh: {fileID: -9157705582939570878, guid: 3878e2a8e5de82042aaa344b5eb5a5f1, type: 3}
+--- !u!23 &2155417886552659230
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6670706425424773498}
+  m_GameObject: {fileID: 6377252931406831113}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -83,34 +83,36 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4723398316656025347
+--- !u!114 &-6103915026238736889
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6670706425424773498}
+  m_GameObject: {fileID: 6377252931406831113}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd9c7789331bb2942bbf046f2102e2b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Self: {fileID: 6670706425424773498}
-  sprite: {fileID: 21300000, guid: 3e52b3394aaabb04ca16e760363548e0, type: 3}
+  Self: {fileID: 6377252931406831113}
+  sprite: {fileID: 21300000, guid: e756cb2a727f58744b9a8856b4805374, type: 3}
   Name: 
   Unit_Price: 3.99
+  Gross_Price: 0
   Space: 12
-  Display: 1
---- !u!65 &540049934515907347
+  Display: 0
+  Reserved: 0
+--- !u!65 &-59558370026969246
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6670706425424773498}
+  m_GameObject: {fileID: 6377252931406831113}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.18311729, y: 0.33583397, z: 0.13812399}
-  m_Center: {x: 0.00008367747, y: 0.16823158, z: 0.0002477616}
+  m_Size: {x: 0.16899939, y: 0.31716245, z: 0.09463981}
+  m_Center: {x: -0.00000010430813, y: 0.15858123, z: 0.000000014901161}

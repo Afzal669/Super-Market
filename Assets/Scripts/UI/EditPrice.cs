@@ -34,21 +34,34 @@ public class EditPrice : MonoBehaviour
     // Example function that you want to call
     private void CustomFunction(string value)
     {
+        float result = 0;
+        if (value != null)
+        {
+            if (float.TryParse(value, out result))
+            {
+                Debug.Log("Custom function called with value: " + value);
+                profit = float.Parse(sellingPrice.text.ToString()) - float.Parse(buyingPrice.text.ToString());
+                if (profit > 0)
+                {
+                    sellingProfit.text = profit.ToString();
+                    sellingProfit.color = Color.green;
+                    sellingProfitText.text = " PROFIT";
+                }
+                else
+                {
+                    sellingProfit.text = profit.ToString();
+                    sellingProfit.color = Color.red;
+                    sellingProfitText.text = " LOSS";
+                }
+            }
+            else
+            {
+                Debug.Log("Input string is not in a correct format.");
+            }
 
-        Debug.Log("Custom function called with value: " + value);
-        profit = float.Parse(sellingPrice.text.ToString()) - float.Parse(buyingPrice.text.ToString());
-        if (profit > 0)
-        {
-            sellingProfit.text = profit.ToString();
-            sellingProfit.color = Color.green;
-            sellingProfitText.text = " PROFIT";
+           
         }
-        else
-        {
-            sellingProfit.text = profit.ToString();
-            sellingProfit.color = Color.red;
-            sellingProfitText.text = " LOSS";
-        }
+        
     }
 
     // Remember to remove listener when the object is destroyed

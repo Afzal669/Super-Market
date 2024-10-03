@@ -208,68 +208,133 @@ public class GenrateBox : MonoBehaviour
         }
         return null;
     }
- 
-  
+
+    /*  
+        public void SaveBoxState()
+        {
+            BoxDataWrapper dataWrapper = new BoxDataWrapper();
+
+            // Create data objects for each product in the box
+            foreach (BoxAddRemove product in GenerateBoxList)
+            {
+                if (product != null)
+                {
+                    BoxSaveData data = new BoxSaveData(
+                        product.name,
+                        product.transform.position,
+                        product.transform.rotation,
+                        product.Product.GetComponent<item>().Name,
+                        product.BoxList.Count
+                    );
+                    dataWrapper.productDataList.Add(data);
+                }
+            }
+
+            // Convert to JSON and save to a file
+            string json = JsonUtility.ToJson(dataWrapper);
+            string path = Application.persistentDataPath + "/boxsave.json";
+            File.WriteAllText(path, json);
+
+            Debug.Log("Box state saved to " + path);
+        }
+
+
+
+        public void LoadBoxState()
+        {
+            string path = Application.persistentDataPath + "/boxsave.json";
+
+            if (File.Exists(path))
+            {
+                // Load the JSON file
+                string json = File.ReadAllText(path);
+
+                // Deserialize JSON into a BoxDataWrapper object
+                BoxDataWrapper loadedData = JsonUtility.FromJson<BoxDataWrapper>(json);
+
+                GenerateBoxList.Clear();
+
+                // Recreate the boxes and products
+                foreach (BoxSaveData data in loadedData.productDataList)
+                {
+                    if(data.productCount>0)
+                    CreateBox(GetProductPrefab(data.ProductName), data.productCount, data.boxPosition, data.boxRotation);
+                }
+
+                Debug.Log("Box state loaded from " + path);
+            }
+            else
+            {
+                Debug.LogWarning("No save file found at " + path);
+            }
+        }*/
+
     public void SaveBoxState()
     {
-        BoxDataWrapper dataWrapper = new BoxDataWrapper();
+        // Clear previous box data
+        PlayerPrefs.SetString("BoxData", "");
+       
 
         // Create data objects for each product in the box
         foreach (BoxAddRemove product in GenerateBoxList)
         {
-            if (product != null)
+            if (product != null&&product.BoxList.Count>0)
             {
-                BoxSaveData data = new BoxSaveData(
-                    product.name,
-                    product.transform.position,
-                    product.transform.rotation,
-                    product.Product.GetComponent<item>().Name,
-                    product.BoxList.Count
-                );
-                dataWrapper.productDataList.Add(data);
+                string data = $"{product.name},{product.transform.position.x},{product.transform.position.y},{product.transform.position.z}," +
+                              $"{product.transform.rotation.x},{product.transform.rotation.y},{product.transform.rotation.z},{product.transform.rotation.w}," +
+                              $"{product.Product.GetComponent<item>().Name},{product.BoxList.Count}";
+
+                // Append data to PlayerPrefs
+                string existingData = PlayerPrefs.GetString("BoxData");
+                PlayerPrefs.SetString("BoxData", existingData + data + "|");
             }
         }
 
-        // Convert to JSON and save to a file
-        string json = JsonUtility.ToJson(dataWrapper);
-        string path = Application.persistentDataPath + "/boxsave.json";
-        File.WriteAllText(path, json);
-
-        Debug.Log("Box state saved to " + path);
+        PlayerPrefs.Save();
+        Debug.Log("Box state saved to PlayerPrefs.");
     }
 
-   
-  
     public void LoadBoxState()
     {
-        string path = Application.persistentDataPath + "/boxsave.json";
+        string data = PlayerPrefs.GetString("BoxData");
 
-        if (File.Exists(path))
+        if (!string.IsNullOrEmpty(data))
         {
-            // Load the JSON file
-            string json = File.ReadAllText(path);
-
-            // Deserialize JSON into a BoxDataWrapper object
-            BoxDataWrapper loadedData = JsonUtility.FromJson<BoxDataWrapper>(json);
+            // Split the data by '|'
+            string[] boxesData = data.Split('|');
 
             GenerateBoxList.Clear();
 
             // Recreate the boxes and products
-            foreach (BoxSaveData data in loadedData.productDataList)
+            foreach (string boxData in boxesData)
             {
-                if(data.productCount>0)
-                CreateBox(GetProductPrefab(data.ProductName), data.productCount, data.boxPosition, data.boxRotation);
+                if (!string.IsNullOrEmpty(boxData))
+                {
+                    string[] values = boxData.Split(',');
+
+                    if (values.Length >= 8)
+                    {
+                        string boxName = values[0];
+                        Vector3 boxPosition = new Vector3(float.Parse(values[1]), float.Parse(values[2]), float.Parse(values[3]));
+                        Quaternion boxRotation = new Quaternion(float.Parse(values[4]), float.Parse(values[5]), float.Parse(values[6]), float.Parse(values[7]));
+                        string productName = values[8];
+                        int productCount = int.Parse(values[9]);
+
+                        CreateBox(GetProductPrefab(productName), productCount, boxPosition, boxRotation);
+                    }
+                }
             }
 
-            Debug.Log("Box state loaded from " + path);
+            Debug.Log("Box state loaded from PlayerPrefs.");
         }
         else
         {
-            Debug.LogWarning("No save file found at " + path);
+            Debug.LogWarning("No save data found in PlayerPrefs.");
         }
     }
 
-   
+
+
 
 
 }

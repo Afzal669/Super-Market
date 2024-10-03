@@ -184,6 +184,24 @@ public class ShelfPlacement : MonoBehaviour
         }
     }
 
+    public void SetCurrentProduct(GameObject obj)
+    {
+    
+        foreach (ShelfSlot s in shelfSlots)
+        {
+            if (s.product!=null&&s.product!=obj)
+            {
+                currentProduct = s.product;
+                return;
+            }
+        }
+
+
+        currentProduct = null;
+        shelfSlots.Clear();
+        countZ = 0;
+    }
+
     public void RemoveProduct()
     {
 
@@ -277,16 +295,7 @@ public class ShelfPlacement : MonoBehaviour
         objectToMove.localPosition = targetPosition;
     }
 
-    public int productQuantity()
-    {
-        int i = 0;
-        foreach (ShelfSlot s in shelfSlots)
-        {
-            if (!s.isPlaceable)
-                i++;
-        }
-        return i;
-    }
+
 
  
     

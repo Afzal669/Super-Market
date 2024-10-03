@@ -98,9 +98,11 @@ MonoBehaviour:
   Self: {fileID: 1638547926956378690}
   sprite: {fileID: 21300000, guid: 6c1a6a686f3ddd14b97c4537352018ae, type: 3}
   Name: 
-  Unit_Price: 21
+  Unit_Price: 52
+  Gross_Price: 0
   Space: 12
   Display: 0
+  Reserved: 0
 --- !u!65 &-1332110654390045202
 BoxCollider:
   m_ObjectHideFlags: 0

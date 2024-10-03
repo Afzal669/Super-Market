@@ -143,6 +143,7 @@ MonoBehaviour:
   Unit_Price: 600
   offSetCollider: {fileID: 1519875985078698973}
   bigCollider: {fileID: 1519875985078698960}
+  extraCol: {fileID: 0}
   targetGreenMesh: {fileID: 0}
   childs: []
   isOnRightPlace: 0
@@ -387,7 +388,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4977425954190440596
 Transform:
   m_ObjectHideFlags: 0
@@ -954,7 +955,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1049731480369252618
 Transform:
   m_ObjectHideFlags: 0
@@ -1050,7 +1051,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &329938886643988729
 Transform:
   m_ObjectHideFlags: 0
@@ -1303,7 +1304,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1899644676972927081
 Transform:
   m_ObjectHideFlags: 0
@@ -1388,6 +1389,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1899644676972927081}
     m_Modifications:
+    - target: {fileID: 3857015453695388599, guid: c13c6b988575e86499f2ca645f12a427, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8237900919524746415, guid: c13c6b988575e86499f2ca645f12a427, type: 3}
       propertyPath: m_Name
       value: Tag

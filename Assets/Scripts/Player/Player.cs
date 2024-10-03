@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     public GameObject CF2Panal;
     public float PlayerAmount;
     public DayTimeManager DayTime;
-
+    public GameObject SurfaceCollider;
     [Header("CashMachine Controls")]
     public bool isOnCashMachine = false;
     public bool isOnATMMachine = false;
@@ -92,8 +92,8 @@ public class Player : MonoBehaviour
     {
         TakeMoneybtn.onClick.AddListener(TakeMoneyFromUser);
         Application.targetFrameRate = 60;
-        PlayerAmount = PlayerPrefs.GetFloat("Money", 5000);
-       // PlayerPrefs.SetFloat("Money", 5000);
+        PlayerAmount = PlayerPrefs.GetFloat("Money", 200);
+        PlayerPrefs.SetFloat("Money", 5000);
         PlayerMoneyText.text = "$" + PlayerAmount;
        
     }
@@ -291,23 +291,32 @@ public class Player : MonoBehaviour
                 isOnCashMachine = true;
                 RayCastControl = false;
             }
-            else if(Current_Interated_Obj.name == "place")
+            else if (Current_Interated_Obj.name == "place")
             {
                 EditPricePanal.SetActive(true);
-                EditPrice editPanla = EditPricePanal.GetComponent<EditPrice>();
+                EditPrice EditPanel = EditPricePanal.GetComponent<EditPrice>();
                 GameObject parent = Current_Interated_Obj.transform.parent.gameObject;
-                GameObject child = Current_Interated_Obj.transform.GetChild(0).gameObject;
+                //  GameObject child = Current_Interated_Obj.transform.GetChild(0).gameObject;
 
                 GameObject currentProduct = parent.GetComponent<ShelfPlacement>().currentProduct;
-                editPanla.image.sprite = currentProduct.GetComponent<item>().sprite;
-                editPanla.Name.text = currentProduct.GetComponent<item>().Name;
+                EditPanel.image.sprite = currentProduct.GetComponent<item>().sprite;
+                EditPanel.Name.text = currentProduct.GetComponent<item>().Name;
                 float UnitPrice = currentProduct.GetComponent<item>().Unit_Price;
-                editPanla.buyingPrice.text = UnitPrice.ToString();
+                EditPanel.buyingPrice.text = UnitPrice.ToString();
                 //editPanla.sellingPrice.text = (currentProduct.GetComponent<item>().Unit_Price * 12).ToString();
-                editPanla.sellingPrice.text = parent.GetComponent<ShelfPlacement>().GrossPrice.ToString();
-                float per = (UnitPrice * 10)/ 100;
-                editPanla.competitivePrice.text = "COMPETITIVE PRICE " + (UnitPrice + per).ToString();
-
+                EditPanel.sellingPrice.text = parent.GetComponent<ShelfPlacement>().GrossPrice.ToString();
+                float per = (UnitPrice * 10) / 100;
+                EditPanel.competitivePrice.text = "COMPETITIVE PRICE " + (UnitPrice + per).ToString();
+                float SelllingPrice = parent.GetComponent<ShelfPlacement>().GrossPrice ;
+                EditPanel.sellingProfit.text = (parent.GetComponent<ShelfPlacement>().GrossPrice - UnitPrice).ToString();
+                if (SelllingPrice < UnitPrice)
+                {
+                    EditPanel.sellingProfit.color = Color.red;
+                }
+                else
+                {
+                    EditPanel.sellingProfit.color = Color.green;
+                }
             }
             else if (Current_Interated_Obj.name == "ATM")
             {
@@ -325,7 +334,7 @@ public class Player : MonoBehaviour
                 Ui_Manager.instance.ComputerPanal.SetActive(true);
                 isOnComputer = true;
                 RayCastControl = false;
-                
+
             }
             //sanaullah Code
             else if (Current_Interated_Obj.GetComponent<item>())
@@ -337,13 +346,13 @@ public class Player : MonoBehaviour
                     if (Current_Interated_Obj.GetComponent<Rigidbody>())
                     {
                         Destroy(Current_Interated_Obj.GetComponent<Rigidbody>());
-                       
+
                     }
                     Current_Interated_Obj.transform.SetParent(HandBoxPosition);
                     Current_Interated_Obj.transform.localPosition = Vector3.zero;
                     Current_Interated_Obj.transform.localRotation = Quaternion.Euler(0, 90, 0);
-                    if(!Current_Interated_Obj.GetComponent<BoxAddRemove>().isOpenBox)
-                    OpenBoxButton.SetActive(true);
+                    if (!Current_Interated_Obj.GetComponent<BoxAddRemove>().isOpenBox)
+                        OpenBoxButton.SetActive(true);
 
                 }
                 if (objectname == "ShelfBox")
@@ -356,9 +365,9 @@ public class Player : MonoBehaviour
                     {
                         if (!HandBoxPosition.GetChild(0).GetComponent<BoxAddRemove>().isOpenBox)
                             return;
-                        BoxAddRemove boxScript= HandBoxPosition.GetChild(0).GetComponent<BoxAddRemove>();
+                        BoxAddRemove boxScript = HandBoxPosition.GetChild(0).GetComponent<BoxAddRemove>();
                         if (!boxScript)
-                              return;
+                            return;
                         if (shelf.currentProduct)
                         {
                             if (!boxScript.IscurrentProduct(shelf.currentProduct.GetComponent<item>().Name))
@@ -367,7 +376,7 @@ public class Player : MonoBehaviour
                                 ItemPlaceWarning.SetActive(true);
                                 return;
                             }
-                                if (!shelf.hasAvailableSlot())
+                            if (!shelf.hasAvailableSlot())
                             {
                                 return;
                             }
@@ -381,7 +390,7 @@ public class Player : MonoBehaviour
 
                         else
                         {
-                         
+
                             if (!(shelf.GetComponent<item>().Display == boxScript.Product.GetComponent<item>().Display))
                             {
                                 ItemPlaceWarningText.text = " Place this item in " + boxScript.Product.GetComponent<item>().Display;
@@ -396,17 +405,17 @@ public class Player : MonoBehaviour
                                     ItemPlaceWarning.SetActive(true);
                                     return;
                                 }
-                          
+
                             GameObject o = HandBoxPosition.GetChild(0).GetComponent<BoxAddRemove>().RemoveProduct();
                             if (o)
                             {
                                 CUSTOMERITEMS.shelvesItem.Add(o.transform);
                                 Current_Interated_Obj.GetComponent<ShelfPlacement>().AddProduct(o);
 
-                                if(Current_Interated_Obj.GetComponent<ShelfPlacement>().currentProduct)
+                                if (Current_Interated_Obj.GetComponent<ShelfPlacement>().currentProduct)
                                 {
                                     Current_Interated_Obj.GetComponent<ShelfPlacement>().Tag.SetActive(true);
-                                    Current_Interated_Obj.GetComponent<ShelfPlacement>().Tag.transform.GetChild(0).GetComponent<Tag>().price.text = "$"+
+                                    Current_Interated_Obj.GetComponent<ShelfPlacement>().Tag.transform.GetChild(0).GetComponent<Tag>().price.text = "$" +
                                     Current_Interated_Obj.GetComponent<ShelfPlacement>().currentProduct.GetComponent<item>().Gross_Price.ToString();
 
 
@@ -432,27 +441,27 @@ public class Player : MonoBehaviour
                     }
 
                 }
-                
+
 
             }
             //Usama.......
             else if (Current_Interated_Obj.name == "Money" && isOnCashMachine)
             {
-               /* CashController.UpdateCashPanel(TotalPayment, ConfirmPayment);
-                //CashController.UpdateCashPanel(54.65f, ConfirmPayment);
-                  PedesterienIKA IKaAnim= Current_Interated_Obj.GetComponentInParent<PedesterienIKA>();
-                if (IKaAnim)
-                {
-                    IKaAnim.rightHandObj = null;
-                    IKaAnim.ikActive = false;
-                }
-                Animator animplay = Current_Interated_Obj.GetComponentInParent<Animator>();
-                if(animplay)
-                {
-                    animplay.Play("Idle_Bag");
-                }
-                MinusDolllarBtn.SetActive(true);
-                Current_Interated_Obj.SetActive(false);*/
+                /* CashController.UpdateCashPanel(TotalPayment, ConfirmPayment);
+                 //CashController.UpdateCashPanel(54.65f, ConfirmPayment);
+                   PedesterienIKA IKaAnim= Current_Interated_Obj.GetComponentInParent<PedesterienIKA>();
+                 if (IKaAnim)
+                 {
+                     IKaAnim.rightHandObj = null;
+                     IKaAnim.ikActive = false;
+                 }
+                 Animator animplay = Current_Interated_Obj.GetComponentInParent<Animator>();
+                 if(animplay)
+                 {
+                     animplay.Play("Idle_Bag");
+                 }
+                 MinusDolllarBtn.SetActive(true);
+                 Current_Interated_Obj.SetActive(false);*/
 
             }
             else if (Current_Interated_Obj.name == "Shop")
@@ -475,6 +484,7 @@ public class Player : MonoBehaviour
         {
             if (Current_Interated_Obj.name == "Box")
             {
+                SurfaceCollider.SetActive(false);
                 GameObject box = Current_Interated_Obj.gameObject;
                 TempPlaceObject = Current_Interated_Obj.GetComponent<Box>().item;
                 print("Temp is = " + TempPlaceObject);
@@ -695,6 +705,7 @@ public class Player : MonoBehaviour
             SpawnObject = null;
             TempPlaceObject = null;
             canPlace = false;
+            SurfaceCollider.SetActive(true);
         }
         
     }

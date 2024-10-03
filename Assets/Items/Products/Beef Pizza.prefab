@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 167562991740837015}
   - component: {fileID: -341749101729673915}
   m_Layer: 0
-  m_Name: Beef_Pizza
+  m_Name: Beef Pizza
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

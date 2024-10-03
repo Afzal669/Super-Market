@@ -47,18 +47,16 @@ public class BoxAddRemove : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.O))
-            boxopen();
-    }
+
 
     public void boxopen()
     {
         isOpenBox = true;
-         Boxdoor.OpenLid();
+        Boxdoor.OpenLid();
         Boxdoor1.OpenLid();
     }
+
+ 
 
 
 }

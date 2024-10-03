@@ -27,4 +27,13 @@ public class item : MonoBehaviour
    
     }
 
+    private void OnDestroy()
+    {
+        ShelfPlacement shelfPlace = GetComponentInParent<ShelfPlacement>();
+        if (shelfPlace)
+        {
+            shelfPlace.SetCurrentProduct(gameObject);
+        }
+    }
+
 }

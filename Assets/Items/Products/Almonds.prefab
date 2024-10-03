@@ -98,9 +98,11 @@ MonoBehaviour:
   Self: {fileID: 1968785530969316091}
   sprite: {fileID: 21300000, guid: 2eeb9e17a7158ac4ba00d8624b19fbb5, type: 3}
   Name: Almonds
-  Unit_Price: 11.43
+  Unit_Price: 12.43
+  Gross_Price: 0
   Space: 12
   Display: 0
+  Reserved: 0
 --- !u!65 &6857304684576412610
 BoxCollider:
   m_ObjectHideFlags: 0

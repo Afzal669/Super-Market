@@ -12,26 +12,40 @@ public class SavingSystem : MonoBehaviour
     public static SavingSystem Instance;
     public CustomerManager CUSTOMERITEMS;
     public GameObject AlreadPlaceShuffle;
+    public Transform RefrencePosition;
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
-        PlayerPrefs.GetInt("ShelfPlament_Id", 0);
+      
     }
-
     private void Start()
     {
         if (PlayerPrefs.GetInt("AlreadyPlace", 0) == 0)
         {
-            IntanSavingList.Add(AlreadPlaceShuffle);
+           GameObject o= Instantiate(AlreadPlaceShuffle);
+            o.transform.position = RefrencePosition.position;
+            o.transform.rotation = RefrencePosition.rotation;
+            IntanSavingList.Add(o);
             SaveGameObjectsData(IntanSavingList);
+            IntanSavingList.Clear();
+            Destroy(o);
             PlayerPrefs.SetInt("AlreadyPlace", 1);
+        }
+    }
+
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            OnSaveButtonClick();
         }
     }
 
 
     public void SaveGameObjectsData(List<GameObject> instantiatedObjects)
     {
+      
         PlayerPrefs.SetFloat("Money", Player.instance.PlayerAmount);
         instantiatedGameObjectListsClassObject.InstantiatedObjectDataList = new List<InstantiatedGameObjectData>();
         foreach (GameObject obj in instantiatedObjects)
@@ -48,18 +62,18 @@ public class SavingSystem : MonoBehaviour
                 if (obj.GetComponent<ShelfParent>())
                 {
                     data.Chidl1 = obj.transform.GetChild(0).GetComponent<ShelfPlacement>().productzsizeX;
-                    data.GrossPrice5 = obj.transform.GetChild(0).GetComponent<ShelfPlacement>().GrossPrice;
+                    data.GrossPrice1 = obj.transform.GetChild(0).GetComponent<ShelfPlacement>().GrossPrice;
                     data.Chidl2 = obj.transform.GetChild(1).GetComponent<ShelfPlacement>().productzsizeX;
-                    data.GrossPrice4 = obj.transform.GetChild(1).GetComponent<ShelfPlacement>().GrossPrice;
+                    data.GrossPrice2 = obj.transform.GetChild(1).GetComponent<ShelfPlacement>().GrossPrice;
                     data.Chidl3 = obj.transform.GetChild(2).GetComponent<ShelfPlacement>().productzsizeX;
                     data.GrossPrice3 = obj.transform.GetChild(2).GetComponent<ShelfPlacement>().GrossPrice;
                     data.Chidl4 = obj.transform.GetChild(3).GetComponent<ShelfPlacement>().productzsizeX;
-                    data.GrossPrice2 = obj.transform.GetChild(3).GetComponent<ShelfPlacement>().GrossPrice;
+                    data.GrossPrice4 = obj.transform.GetChild(3).GetComponent<ShelfPlacement>().GrossPrice;
 
                     if (obj.transform.GetChild(4).GetComponent<ShelfPlacement>())
                     {
                         data.Chidl5 = obj.transform.GetChild(4).GetComponent<ShelfPlacement>().productzsizeX;
-                        data.GrossPrice1 = obj.transform.GetChild(4).GetComponent<ShelfPlacement>().GrossPrice;
+                        data.GrossPrice5 = obj.transform.GetChild(4).GetComponent<ShelfPlacement>().GrossPrice;
                         print("Save" + data.GrossPrice1);
                     }
                 }
@@ -69,6 +83,7 @@ public class SavingSystem : MonoBehaviour
         }
 
         string instantiatedObjJson = JsonUtility.ToJson(instantiatedGameObjectListsClassObject, true);
+        print(instantiatedObjects);
         PlayerPrefs.SetString(instantiatedPlayerPrefsKey, instantiatedObjJson);
         PlayerPrefs.Save();
     }
@@ -78,11 +93,13 @@ public class SavingSystem : MonoBehaviour
         Player.instance.PlayerAmount = PlayerPrefs.GetFloat("Money",5000);
         Player.instance.PlayerMoneyText.text ="$"+ Player.instance.PlayerAmount.ToString("F2");
         string instantiatedObjInfo = PlayerPrefs.GetString(instantiatedPlayerPrefsKey);
+        print(instantiatedObjInfo);
         if (!string.IsNullOrEmpty(instantiatedObjInfo))
         {
             instantiatedGameObjectListsClassObject.InstantiatedObjectDataList = new List<InstantiatedGameObjectData>();
             InstantiatedGameObjectListsClass loadedData = JsonUtility.FromJson<InstantiatedGameObjectListsClass>(instantiatedObjInfo);
-         
+            
+
             foreach (InstantiatedGameObjectData data in loadedData.InstantiatedObjectDataList)
             {
                
@@ -127,13 +144,14 @@ public class SavingSystem : MonoBehaviour
         }
     }
 
-    /*public void OnSaveButtonClick()
+    public void OnSaveButtonClick()
     {
         boxSaving.SaveBoxState();
         SaveGameObjectsData(IntanSavingList);
-    }*/
+    }
     private void OnApplicationQuit()
     {
+        print("this is called app");
         boxSaving.SaveBoxState();
         SaveGameObjectsData(IntanSavingList);
     }

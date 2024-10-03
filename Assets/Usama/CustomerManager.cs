@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AI;
 
 public class CustomerManager : MonoBehaviour
@@ -16,6 +17,8 @@ public class CustomerManager : MonoBehaviour
     public bool ShopOpen = false;
     public List<GameObject> InstantiatedObj= new List<GameObject>();
     private Coroutine spawnCustomerCoroutine;
+    public GameObject ShowMessage;
+    public Text ShowMessageTEXT;
     private void Start()
     {
         // Find all objects of type ShelfParent
@@ -91,8 +94,9 @@ public class CustomerManager : MonoBehaviour
                 }
                 else
                 {
-                    
+
                     StartCoroutine(CustomerCoroutine(agent, Destination.position));
+
                 }
             }
         
@@ -128,6 +132,7 @@ public class CustomerManager : MonoBehaviour
         agent.stoppingDistance = 1f;
         agent.SetDestination(initialPosition);
         yield return  new WaitForSeconds(0.1f);
+        InstantiatedObj.Remove(agent.gameObject);
         animator.Play("Walk"); // Play Idle animation
         yield return  new WaitForSeconds(0.5f);
         // Wait until the agent returns to the initial position
@@ -137,7 +142,6 @@ public class CustomerManager : MonoBehaviour
         }
 
         // Destroy the agent after reaching the initial position
-        InstantiatedObj.Remove(agent.gameObject);
         Destroy(agent.gameObject);
     }
 
@@ -222,75 +226,110 @@ public class CustomerManager : MonoBehaviour
         agent.enabled = false;
 
         // Rotate customer towards the item
-      // StartCoroutine(RotateCustomerTowardsItem(agent.transform, item));
+       StartCoroutine(RotateCustomerTowardsItem(agent.transform, item));
         yield return new WaitForSeconds(0.5f);
-        Transform objChild = customer.transform.GetChild(1).transform;
-        // Calculate the direction vector from the child's position to the item to Play Animation According to it 
-        Vector3 directionToItem = item.position - objChild.position;
-        float yDifference = directionToItem.y; // Check the vertical distance (up or down)
-        float zDifference = directionToItem.z; // Check the forward distance
-        float threshold = 0.1f; // Adjust this as needed
-
-        // Play different animations based on the relative position of the item
+        item unitPrice = item.GetComponent<item>();
+       // ShelfPlacement GrossPrice = item.transform.parent.transform.parent.GetComponent<ShelfPlacement>();
         Animator animator = customer.GetComponent<Animator>(); // Assuming customer has an Animator component
-        AnimationClip anim = null;
-        if (animator != null)
+        if (unitPrice.Unit_Price != unitPrice.Gross_Price)
         {
-            if (yDifference > threshold) // Item is above the character
+            Transform objChild = customer.transform.GetChild(1).transform;
+            // Calculate the direction vector from the child's position to the item to Play Animation According to it 
+            Vector3 directionToItem = item.position - objChild.position;
+            float yDifference = directionToItem.y; // Check the vertical distance (up or down)
+            float zDifference = directionToItem.z; // Check the forward distance
+            float threshold = 0.1f; // Adjust this as needed
+            AnimationClip anim = null;
+            if (animator != null)
             {
-                animator.Play("Grab"); // Play up animation
-                anim = AnimClip[0];
+                if (yDifference > threshold) // Item is above the character
+                {
+                    animator.Play("Grab"); // Play up animation
+                    anim = AnimClip[0];
+                }
+                else if (yDifference < -threshold) // Item is below the character
+                {
+                    animator.Play("Kneeling"); // Play down animation
+                    anim = AnimClip[2];
+                }
+                else if (Mathf.Abs(zDifference) > threshold) // Item is in front of the character
+                {
+                    animator.Play("Grab2"); // Play front animation
+                    anim = AnimClip[1];
+                }
+                else
+                {
+                    anim = AnimClip[0];
+                }
             }
-            else if (yDifference < -threshold) // Item is below the character
+            yield return new WaitForSeconds(anim.length);
+            animator.Play("Idle"); // Play Idle animation
+            yield return new WaitForSeconds(1f);
+            CharcaterBehaviour charcater = customer.GetComponent<CharcaterBehaviour>();
+            item.gameObject.SetActive(false);
+            shelvesItem.Remove(item);
+            GameObject itemtohold = Instantiate(item.gameObject);
+            Destroy(item.gameObject);
+            itemtohold.SetActive(false);
+            itemtohold.tag = "Item";
+            itemtohold.transform.parent = transform;
+            charcater.SelectedItem++;
+            charcater.CharcaterHoldingItem.Add(itemtohold);
+            if (charcater.SelectedItem < charcater.ItemToPurchase)
             {
-                animator.Play("Kneeling"); // Play down animation
-                anim = AnimClip[2];
+                // After finishing the action, check for another available shelf
+                Transform nextShelf = GetAvailableItem();
+                if (nextShelf != null)
+                {
+                    Vector3 nextPosition = nextShelf.position;
+                    // Move to the next available shelf
+                    agent.enabled = true;
+                    agent.SetDestination(nextPosition);
+                    animator.Play("Walk"); // Play Idle animation
+                    yield return new WaitForFixedUpdate();
+                    // Wait until the customer reaches the next shelf
+                    yield return WaitForCustomerToReach(agent, nextShelf, customer);
+                }
+                else
+                {
+                    yield return null;
+                }
             }
-            else if (Mathf.Abs(zDifference) > threshold) // Item is in front of the character
-            {
-                animator.Play("Grab2"); // Play front animation
-                anim = AnimClip[1];
-            }
-            else
-            {
-                anim = AnimClip[0];
-            }
+            //StopCoroutine(RotateCustomerTowardsItem(agent.transform, item));
+            customer.GetComponent<CharcaterBehaviour>().FindCashier();
         }
-        yield return new WaitForSeconds(anim.length);
-        animator.Play("Idle"); // Play Idle animation
-        yield return new WaitForSeconds(1f);
-        CharcaterBehaviour charcater = customer.GetComponent<CharcaterBehaviour>();
-        item.gameObject.SetActive(false);
-        shelvesItem.Remove(item);
-        GameObject itemtohold = Instantiate(item.gameObject);
-        Destroy(item.gameObject);
-        itemtohold.SetActive(false);
-        itemtohold.tag = "Item";
-        itemtohold.transform.parent = transform;
-        charcater.SelectedItem++;
-        charcater.CharcaterHoldingItem.Add(itemtohold);
-        if (charcater.SelectedItem < charcater.ItemToPurchase)
+        else
         {
-            // After finishing the action, check for another available shelf
-            Transform nextShelf = GetAvailableItem();
-            if (nextShelf != null)
-            {
-                Vector3 nextPosition = nextShelf.position;
-                // Move to the next available shelf
-                agent.enabled = true;
-                agent.SetDestination(nextPosition);
-                animator.Play("Walk"); // Play Idle animation
-                yield return new  WaitForFixedUpdate();
-                // Wait until the customer reaches the next shelf
-                yield return WaitForCustomerToReach(agent, nextShelf, customer);
-            }
-            else
-            {
-                yield return null;
-            }
+            agent.enabled = false;
+            animator.Play("Dismissing");
+            yield return new WaitForSeconds(0.5f);
+            ShowMessageTEXT.text = "Attention:  Set the price for" + unitPrice.Name+ ",\n customers can't buy without it!";
+            ShowMessage.SetActive(true);
+            yield return new WaitForSeconds(1.5f);
+            agent.enabled = true;
+            agent.SetDestination(agent.GetComponent<CharcaterBehaviour>().initialPosition);
+            animator.Play("Walk");
+            StartCoroutine(MOveplayerbackToInitialPosition(agent));
         }
-       //StopCoroutine(RotateCustomerTowardsItem(agent.transform, item));
-        customer.GetComponent<CharcaterBehaviour>().FindCashier();
+    }
+
+    public IEnumerator MOveplayerbackToInitialPosition(NavMeshAgent agent)
+    {
+        InstantiatedObj.Remove(agent.gameObject);
+        //agent.stoppingDistance = 1f;
+        // Wait until the agent reaches the destination
+        bool _isMoving = true;
+        while (_isMoving)
+        {
+            if (agent.hasPath && agent.remainingDistance < 1)
+            {
+                _isMoving = false; //print("  " + agent.remainingDistance);
+            }
+            yield return null;  // Wait for the next frame
+        } 
+           
+        // Destroy the agent after reaching the initial position
+        Destroy(agent.gameObject);
     }
 
     private IEnumerator RotateCustomerTowardsItem(Transform customerTransform, Transform itemTransform)
